@@ -1,5 +1,5 @@
 # Site WEB EMA Aubergine
-EMA Aubergines communautaire website is the website for referencing all usefull ressources for association life.  
+EMA Aubergines community website is the website for referencing all usefull ressources for association life.  
 
 ## Important links
 - [CDC](https://docs.google.com/document/d/1D_Cwk_JPBvU4kycO7Sg9CPh1gqrGHQWg/edit?usp=sharing&ouid=112875743801870679130&rtpof=true&sd=true)  
