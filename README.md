@@ -19,3 +19,8 @@ EMA Aubergines community website is the website for referencing all usefull ress
 - [Chad Estoup--Streiff](https://github.com/ChadEstoupStreiff)  
 > Lead developper  
 > Full stack Developper  
+
+
+## To install
+create .env file based on .env_ex file and launch docker wit cmd
+```sudo docker-compose up -d```
