@@ -7,9 +7,6 @@ EMA Aubergines community website is the website for referencing all usefull ress
 
 ## Ressources
 - [Learn PHP](https://www.codingame.com/playgrounds/34845/le-php---les-bases-du-langage/introduction)  
-- [Learn Rust](https://doc.rust-lang.org/book/)  
-- [Learn Rust (Vidéo)](https://youtube.com/playlist?list=PLVvjrrRCBy2JSHf9tGxGKJ-bYAN_uDCUL)  
-- [Actix (WEB back-end library for Rust)](https://actix.rs/)  
 - [Learn Docker](https://docs.docker.com/get-started/)  
 
 ## Equipe
