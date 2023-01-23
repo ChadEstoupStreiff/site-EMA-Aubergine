@@ -1,16 +1,15 @@
 <?
-    require_once("model/ModelUser.php");
     class UserUtils {
         public static function isConnected() {
-            return array_key_exists('type', $_SESSION);
+            return array_key_exists('user_model', $_SESSION);
         }
 
         public static function hasType($type) {
-            return self::isConnected() && ($_SESSION["type"] === $type || $_SESSION["type"] === "ADMIN" || $_SESSION["type"] === "PROF");
+            return self::isConnected() && ($_SESSION["user_model"]->gettype() === $type || $_SESSION["user_model"]->gettype() === "ADMIN");
         }
 
         public static function isAdmin() {
-            return self::isConnected() && $_SESSION["type"] === "ADMIN";
+            return self::isConnected() && $_SESSION["user_model"]->gettype() === "ADMIN";
         }
 
 
@@ -29,9 +28,19 @@
             return false;
         }
 
-        public static function getId()
+        public static function getLogin()
         {
-            return $_SESSION['id'];
+            return $_SESSION['user_model']->getLogin();
+        }
+
+        public static function getUser($login = NULL) {
+            if ($login == NULL) {
+                if (UserUtils::isConnected())
+                    return $_SESSION["user_model"];
+                else
+                    return false;
+            }
+            return ModelUser::getByLogin($login);
         }
     }
     

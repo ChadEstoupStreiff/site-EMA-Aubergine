@@ -1,9 +1,10 @@
 <?
-session_start();
 // error_reporting(E_ERROR | E_PARSE);
 
+require_once("model/ModelUser.php");
 require_once("utils/UserUtils.php");
 require_once("utils/ViewManager.php");
+session_start();
 
 if (sizeof($_GET) > 0 && array_key_exists("c", $_GET)) {
     $c = $_GET["c"];

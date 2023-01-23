@@ -11,15 +11,19 @@ body {
 * {
     margin: 0;
     padding: 0;
-    transition-duration: 0.5s;
 }
 
 /* TEXT */
 
+i {
+    font-size: 3.5vh;
+    color: #773ac5;
+}
+
 hr {
     margin: 3vh;
     width: 40%;
-    color: white;
+    color: #773ac5;
 }
 
 h1, h2, h3, p, a, input {
@@ -47,23 +51,25 @@ p {
 
 a {
     text-decoration: none;
-    color: rgb(150, 150, 250);
+    color: #773ac5;
 }
 
 input[type=text], input[type=password] {
     background-color: transparent;
+    text-align: center;
 
     padding: 0.5vh;
     margin: 3vh;
 
     border: 0;
-    border-bottom: 3px solid gray;
+    border-bottom: 3px solid #773ac550;
+    transition-duration: 0.5s;
 }
 
 input[type=text]:focus, input[type=password]:focus {
 
     border: 0;
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid #773ac5;
 }
 
 /* SPECIAL */
@@ -98,14 +104,22 @@ input[type=submit], .button, button {
     padding: 1vh 3vh;
     color: white;
     background-color: transparent;
-    border: 2px white solid;
+    border: 2px #773ac5 solid;
+    transition-duration: 0.5s;
 }
 
 input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover {
     cursor: pointer;
-    color: black;
     border-radius: 5vh;
-    background-color: white;
+    background-color: #773ac5;
+}
+
+.red {
+    border: 1px red solid;
+}
+
+.red:hover {
+    background-color: red;
 }
 
 
@@ -114,7 +128,7 @@ header {
     background-color: rgb(0, 0, 0);
     height: 5vh;
 
-    padding: 0 5vw;
+    padding: 0 3vw;
     justify-content: space-between;
 
 

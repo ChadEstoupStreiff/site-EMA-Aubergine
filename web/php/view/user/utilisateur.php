@@ -1,6 +1,11 @@
-<h1>Utilisateur: <?php echo $_SESSION["login"]?></h1>
-<h1>Type: <?php echo $_SESSION["type"]?></h1>
+<h1>Bonjour <a><?php echo $var->getNickName()?></a> !</h1>
+
+<hr/>
+
+<h2>Utilisateur: <?php echo $var->getLogin()?></h2>
+<h2>Type: <?php echo $var->getType()?></h2>
 <div class="inline">
-    <a class="button red" href="./?c=User&f=disconnect">Se déconnecter</a>
-    <a class="button" href="./?c=User&f=passwordForm">Changer de mot de passe</a>
+    <a class="button" href="./?c=User&f=informations">Changer ses informations</a>
+    <a class="button" href="./?c=User&f=password">Changer de mot de passe</a>
 </div>
+<a class="button red" href="./?c=User&f=disconnect">Se déconnecter</a>

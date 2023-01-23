@@ -13,7 +13,7 @@
         private static $has_header = false;
 
         public static function callAdmin($view, $var=NULL) {
-            ViewManager::callView("user/" . $view, $var);
+            ViewManager::callView("admin/" . $view, $var);
         }
 
         public static function callUser($view, $var=NULL) {

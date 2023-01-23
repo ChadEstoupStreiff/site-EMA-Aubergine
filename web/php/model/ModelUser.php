@@ -4,10 +4,12 @@ class ModelUser implements  Model {
 
     private $type;
     private $login;
+    private $nickname;
     private $password;
 
-    public function __construct($ty = NULL, $login = NULL, $pwd = NULL) {
+    public function __construct($ty = NULL, $login = NULL, $nickname = NULL, $pwd = NULL) {
         $this->setType($ty);
+        $this->setNickName($nickname);
         $this->setLogin($login);
         $this->setPassword($pwd);
     }
@@ -105,13 +107,15 @@ class ModelUser implements  Model {
 
     public function save() {
         if (self::getByLogin($this->getLogin()) == false) {
-            $sqlI = "INSERT INTO User (type, login, password) VALUES (:ty, :log, :pwd)";
+            $sqlI = "INSERT INTO User (type, login, nickname, password) VALUES (:ty, :log, :nic, :pwd)";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sqlI);
                 $values = array(
                     "ty" => $this->type,
                     "log" => $this->login,
-                    "pwd" => $this->password);
+                    "nic" => $this->nickname,
+                    "pwd" => $this->password
+                );
                 $req_prep->execute($values);
                 return true;
             } catch (PDOException $e) {
@@ -119,13 +123,15 @@ class ModelUser implements  Model {
                 return false;
             }
         } else {
-            $sql = "UPDATE User SET type = :ty, password = :pwd WHERE login = :log";
+            $sql = "UPDATE User SET type = :ty, nickname = :nic, password = :pwd WHERE login = :log";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sql);
                 $values = array(
                     "ty" => $this->type,
                     "log" => $this->login,
-                    "pwd" => $this->password);
+                    "nic" => $this->nickname,
+                    "pwd" => $this->password
+                );
                 $req_prep->execute($values);
                 return true;
             } catch (PDOException $e) {
@@ -153,6 +159,7 @@ class ModelUser implements  Model {
         $UserRecovered = self::getByLogin($this->getLogin());
         $this->setType($UserRecovered->getType());
         $this->setLogin($UserRecovered->getLogin());
+        $this->setNickName($UserRecovered->getNickName());
         $this->setPassword($UserRecovered->getPassword());
     }
 
@@ -162,6 +169,10 @@ class ModelUser implements  Model {
 
     public function getType() {
         return $this->type;
+    }
+
+    public function getNickName() {
+        return $this->nickname;
     }
 
     public function getLogin() {
@@ -193,6 +204,16 @@ class ModelUser implements  Model {
                 $this->login = $login;
             } else {
                 CustomError::callError("Le nom ne doit pas dépasser les 32 caractères");
+            }
+        }
+    }
+
+    public function setNickName($nickname) {
+        if (!is_null($nickname)) {
+            if (strlen($nickname) <= 32) {
+                $this->nickname = $nickname;
+            } else {
+                CustomError::callError("Le pseudo ne doit pas dépasser les 32 caractères");
             }
         }
     }
