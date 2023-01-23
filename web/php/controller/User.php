@@ -5,8 +5,6 @@
                 $_SESSION = array();
                 session_destroy();
             }
-
-            
             UserUtils::askToConnect();
         }
 
@@ -16,8 +14,7 @@
             require_once("utils/DBCom.php");
 
             // Define variables and initialize with empty values
-            $login = $password = "";
-            $username_err = $password_err = $login_err = "";
+            $var = array();
 
             // Processing form data when form is submitted
 
@@ -25,20 +22,18 @@
             if (!array_key_exists("username", $_POST)) {
                 $username_err = "Please enter username.";
             } else {
-                $login = $_POST["username"];
+                $var["login"] = $_POST["username"];
             }
 
             // Check if password is empty
-            if (!array_key_exists("username", $_POST)) {
-                $password_err = "Please enter your password.";
-            } else {
-                $password = $_POST["password"];
+            if (array_key_exists("password", $_POST)) {
+                $var["password"] = $_POST["password"];
             }
 
             // Validate credentials
-            if (empty($username_err) && empty($password_err)) {
+            if (array_key_exists("login", $var) && array_key_exists("password", $var)) {
                 // Prepare a select statement
-                $sql = "SELECT id, type, login, password FROM Utilisateur WHERE login = :username";
+                $sql = "SELECT type, login, password FROM User WHERE login = :username";
 
                 if ($stmt = DBCom::getPDO()->prepare($sql)) {
 
@@ -52,15 +47,12 @@
                         // Check if username exists, if yes then verify password
                         if ($stmt->rowCount() == 1) {
                             if ($row = $stmt->fetch()) {
-                                $id = $row["id"];
-                                $login = $row["login"];
+                                $var["login"] = $row["login"];
                                 $hashed_password = $row["password"];
                                 $type = $row["type"];
-                                if (password_verify($password, $hashed_password)) {
-
-                                    $_SESSION["id"] = $id;
+                                if (password_verify($var["password"], $hashed_password)) {
                                     $_SESSION["type"] = $type;
-                                    $_SESSION["login"] = $login;
+                                    $_SESSION["login"] = $var["login"];
 
                                     if (array_key_exists("redirection", $_COOKIE))
                                         header("location: " . $_COOKIE['redirection']);
@@ -72,13 +64,13 @@
                         } else
                             CustomError::callError("This account does not exists");
                     } else
-                        ViewManager::callUser('connect');
+                        ViewManager::callUser('connect', $var);
 
                     // Close statement
                     unset($stmt);
                 }
             } else
-                ViewManager::callUser('connect');
+                ViewManager::callUser('connect', $var);
         }
 
         public static function accueilAdmin(){
@@ -90,52 +82,26 @@
             }
         }
 
-        public static function created(){
-            if(UserUtils::askToConnectAndHasType("ADMIN")) {
-                if (($_POST["type"] == "PROF" || $_POST["type"] == "ADMIN") && !UserUtils::isAdmin()) {
-                    CustomError::callError("You can't access to this content");
-                }
-                $user = new ModelUtilisateur(null, $_POST["type"], $_POST["login"], password_hash($_POST["mdp"],PASSWORD_BCRYPT ));
-                $user->save();
-                header('location: ./?c=Administrateur');
-            }
-            else{
-                CustomError::callError("You can't access to this content");
-            }
-        }
-
-        public static function createdList() {
-            if(UserUtils::askToConnectAndHasType("ADMIN")) {
-                if (($_POST["type"] == "PROF" || $_POST["type"] == "ADMIN") && !UserUtils::isAdmin()) {
-                    CustomError::callError("You can't access to this content");
-                }
-                $map = array();
-                $tab = explode(',', $_POST['list']);
-                $type = $_POST["type"];
-
-                foreach ($tab as $loginClair) {
-                    $array = str_replace(' ', '', explode("@", $loginClair)[0]);
-                    $array = explode('.', $array);
-                    $login = end($array) . $array[0][0];
-                    $pass = User::generateRandomString();
-
-                    $user = new ModelUtilisateur(null, $type, $login, password_hash($pass, PASSWORD_BCRYPT));
+        public static function register() {
+            
+            if (array_key_exists("login", $_POST) && array_key_exists("password", $_POST) && array_key_exists("password-verify", $_POST)) {
+                if (strcmp($_POST['password'], $_POST['password-verify']) == 0) {
+                    $user = new ModelUser("GUEST", $_POST["login"], password_hash($_POST["password"],PASSWORD_BCRYPT ));
                     $user->save();
-
-                    $map[$login] = $pass;
+                    User::disconnect();
+                    header('location: ./?c=User');
+                } else {
+                    CustomError::callError("Les mots de passe ne sont pas égaux");
                 }
-
-                ViewManager::callAdmin('newUserList');
-            }
-            else{
-                CustomError::callError("You can't access to this content");
+            } else {
+                ViewManager::callUser("register");
             }
         }
 
         public static function delete() {
             if(UserUtils::askToConnectAndHasType("ADMIN")) {
                 if (array_key_exists('id', $_GET)) {
-                    $user = ModelUtilisateur::getByID($_GET['id']);
+                    $user = ModelUser::getByID($_GET['id']);
                     if ($user != false) {
                         if (($user->getType() == "PROF" || $user->getType() == "ADMIN") && !UserUtils::isAdmin()) {
                             CustomError::callError("You can't access to this content");
@@ -157,7 +123,7 @@
         public static function regeneratepassword() {
             if(UserUtils::askToConnectAndHasType("ADMIN")) {
                 if (array_key_exists('id', $_GET)) {
-                    $user = ModelUtilisateur::getByID($_GET['id']);
+                    $user = ModelUser::getByID($_GET['id']);
                     if ($user != false) {
                         if (($user->getType() == "PROF" || $user->getType() == "ADMIN") && !UserUtils::isAdmin()) {
                             CustomError::callError("You can't access to this content");
@@ -195,7 +161,7 @@
         }
 
         public static function updatePassword() {
-            $user = ModelUtilisateur::getByID(UserUtils::getId());
+            $user = ModelUser::getByID(UserUtils::getId());
             if (password_verify($_POST['oldpass'] , $user->getPassword())) {
                 if (strcmp($_POST['newpass'], $_POST['confirmpass']) == 0) {
                     $user->setPassword(password_hash($_POST['newpass'],PASSWORD_BCRYPT));

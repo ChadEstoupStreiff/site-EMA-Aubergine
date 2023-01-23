@@ -1,26 +1,10 @@
-<?php
-if(!empty($login_err)){
-    echo '<div class="alert alert-danger">' . $login_err . '</div>';
-}
-?>
-<div class="connect-container">
-    <h1>Connexion</h1>
-    <hr />
-    <div class="connect-form">
-        <form action="./?p=User&f=connect" method="post">
-            <div class="field">
-                <label>Pseudo</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $login; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
-            </div>
-            <div class="field">
-                <label>Mot de passe</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
-            </div>
-            <div class="field">
-                <input type="submit" class="button" value="Login">
-            </div>
-        </form>
-    </div>
-</div>
+<h1>Connexion</h1>
+<hr />
+<form action="./?c=User&f=connect" method="post" class="center">
+    <label><h2>Utilisateur</h2></label>
+    <input type="text" name="username" placeholder="Entrez votre nom d'utilisateur" <?php if (array_key_exists("login", $var)) echo "value=\"" . $var["login"] . "\""; ?> required>
+    <label><h2>Mot de passe</h2></label>
+    <input type="password" name="password" placeholder="Entrez votre mot de passe" required>
+    <input type="submit" class="button" value="Se connecter">
+    <a href="?c=User&f=register">S'enregistrer</a>
+</form>

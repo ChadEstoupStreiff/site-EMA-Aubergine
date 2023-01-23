@@ -1,5 +1,5 @@
 <?
-
+    require_once("model/ModelUser.php");
     class UserUtils {
         public static function isConnected() {
             return array_key_exists('type', $_SESSION);

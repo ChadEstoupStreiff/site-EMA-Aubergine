@@ -2,7 +2,6 @@
 require_once('./utils/DBCom.php');
 interface Model {
 
-    public static function getByID($id);
     public static function getByAttribute($attribute, $value);
     public static function getByAttributeAndCondition($attribute, $condition, $value);
 

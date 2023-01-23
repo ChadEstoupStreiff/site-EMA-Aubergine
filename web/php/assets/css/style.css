@@ -15,7 +15,14 @@ body {
 }
 
 /* TEXT */
-h1, h2, h3, p, a {
+
+hr {
+    margin: 3vh;
+    width: 40%;
+    color: white;
+}
+
+h1, h2, h3, p, a, input {
     font-family: Lato, sans-serif, monospace;
     color: rgb(200, 200, 200);
     text-align: justify;
@@ -26,7 +33,7 @@ h1 {
     font-size: 5vh;
 }
 
-h2 {
+h2, input {
     font-size: 2vh;
 }
 
@@ -43,21 +50,20 @@ a {
     color: rgb(150, 150, 250);
 }
 
-/* PARTS */
-header {
-    background-color: rgb(0, 0, 0);
-    height: 5vh;
+input[type=text], input[type=password] {
+    background-color: transparent;
+
+    padding: 0.5vh;
+    margin: 3vh;
+
+    border: 0;
+    border-bottom: 3px solid gray;
 }
 
-#content {
-    min-height: 95vh;
-}
+input[type=text]:focus, input[type=password]:focus {
 
-footer {
-    display: fle;
-
-    background-color: rgb(0, 0, 0);
-    height: 3vh;
+    border: 0;
+    border-bottom: 3px solid white;
 }
 
 /* SPECIAL */
@@ -82,4 +88,47 @@ div.error {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+input[type=submit], .button, button {
+    font-size: 1.5vh;
+    text-align: center;
+    padding: 0.5vh 2vh;
+    margin: 2vh;
+    padding: 1vh 3vh;
+    color: white;
+    background-color: transparent;
+    border: 2px white solid;
+}
+
+input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover {
+    cursor: pointer;
+    color: black;
+    border-radius: 5vh;
+    background-color: white;
+}
+
+
+/* PARTS */
+header {
+    background-color: rgb(0, 0, 0);
+    height: 5vh;
+
+    padding: 0 5vw;
+    justify-content: space-between;
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#content {
+    min-height: 95vh;
+}
+
+footer {
+    background-color: rgb(0, 0, 0);
+    height: 3vh;
 }

@@ -5,7 +5,7 @@
 
         # Initialise le PDO
         public static function init() {
-            require_once('config/DBConf.php');
+            require_once('/var/www/config/DBConf.php');
             try{
                 self::$pdo = new PDO(
                     "mysql:host=" . DBConf::getHostname() . ";dbname=" . DBConf::getDatabase(),
@@ -14,11 +14,8 @@
                     array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch(PDOException $e) {
-                $_POST["error_message"] = "Erreur lors de la connection à la Base de Données: " . $e;
-
-                $controller = '';
-                $view = 'error';
-                require('view/view.php');
+                CustomError::callError("Error connecting to DataBase: " . $e);
+                require_once('view/footer.php');
                 die();
             }
         }
