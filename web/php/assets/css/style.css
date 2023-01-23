@@ -1,0 +1,85 @@
+/*global*/
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: rgb(20, 20, 20);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    transition-duration: 0.5s;
+}
+
+/* TEXT */
+h1, h2, h3, p, a {
+    font-family: Lato, sans-serif, monospace;
+    color: rgb(200, 200, 200);
+    text-align: justify;
+    letter-spacing: 0.1em;
+}
+
+h1 {
+    font-size: 5vh;
+}
+
+h2 {
+    font-size: 2vh;
+}
+
+h3 {
+    font-size: 1.5vh;
+}
+
+p {
+    font-size: 1vh;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(150, 150, 250);
+}
+
+/* PARTS */
+header {
+    background-color: rgb(0, 0, 0);
+    height: 5vh;
+}
+
+#content {
+    min-height: 95vh;
+}
+
+footer {
+    display: fle;
+
+    background-color: rgb(0, 0, 0);
+    height: 3vh;
+}
+
+/* SPECIAL */
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+}
+
+div.error {
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 10px;
+
+    width: 400px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

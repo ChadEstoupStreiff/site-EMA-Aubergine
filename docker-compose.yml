@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  #TODO back-end app
+  ema_aubergine_web:
+    env_file:
+      - .env
+    depends_on:
+      - ema_aubergine_database
+    links:
+      - ema_aubergine_database
+    build:
+      context: ./web
+    container_name: front_ema_aubergine
+    restart: always
+    volumes:
+      - ./web/php/:/var/www/html/
+      - ./web/config/:/var/www/config/
+      - ./web/php.ini:/usr/local/etc/php/conf.d/custom.php.ini
+
+    ports:
+      - ${WEB_PORT}:80
+    networks:
+      - ema_aubergine
+
+  ema_aubergine_database:
+    env_file:
+      - .env
+    image: 'mariadb:latest'
+    container_name: ema_aubergine_database
+    restart: always
+    environment:
+      - MYSQL_USER=${SQL_USER}
+      - MYSQL_PASSWORD=${SQL_PASSWORD}
+      - MYSQL_DATABASE=${SQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${SQL_ROOTPASSWORD}
+    volumes:
+      - ./${SQL_DATA_PATH}:/var/lib/mysql/
+    networks:
+      - ema_aubergine
+
+
+networks:
+  ema_aubergine:
