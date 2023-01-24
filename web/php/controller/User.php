@@ -28,7 +28,7 @@
                     } else
                         CustomError::callError("User does not exists");   
                 } else
-                    CustomError::callError("Captcha invalid");
+                    CustomError::callError("Captcha invalide");
             } else
                 ViewManager::callUser('connect');
         }
@@ -38,20 +38,23 @@
             if (array_key_exists("login", $_POST) && array_key_exists("password", $_POST) && array_key_exists("password-verify", $_POST)) {
                 require_once "utils/ReCaptcha.php";
                 if (!Conf::isCaptchaEnable() || ReCaptchaUtils::checkValid()) {
-                    $nickname = "";
-                    if (array_key_exists("nickname", $_POST))
-                        $nickname = $_POST["nickname"];
-                    else
-                        $nickname = $_POST["login"];
-                    if (strcmp($_POST['password'], $_POST['password-verify']) == 0) {
-                        $user = new ModelUser("GUEST", $_POST["login"], $nickname, password_hash($_POST["password"],PASSWORD_BCRYPT ));
-                        $user->save();
-                        User::disconnect();
-                        header('location: ./?c=User');
+                    if (UserUtils::getUser($_POST["login"]) == false) {
+                        $nickname = "";
+                        if (array_key_exists("nickname", $_POST))
+                            $nickname = $_POST["nickname"];
+                        else
+                            $nickname = $_POST["login"];
+                        if (strcmp($_POST['password'], $_POST['password-verify']) == 0) {
+                            $user = new ModelUser("GUEST", $_POST["login"], $nickname, password_hash($_POST["password"],PASSWORD_BCRYPT ));
+                            $user->save();
+                            User::disconnect();
+                            header('location: ./?c=User');
+                        } else
+                            CustomError::callError("Les mots de passe ne sont pas égaux");
                     } else
-                        CustomError::callError("Les mots de passe ne sont pas égaux");
+                        CustomError::callError("L'utilisateur existe déjà");
                 } else
-                    CustomError::callError("Captcha invalid");
+                    CustomError::callError("Captcha invalide");
             } else
                 ViewManager::callUser("register");
         }

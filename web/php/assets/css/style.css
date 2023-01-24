@@ -131,7 +131,7 @@ input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover 
 /* PARTS */
 header {
     background-color: rgb(40, 40, 40);
-    height: 5vh;
+    height: calc(5vh - 2px);
 
     padding: 0 3vw;
     justify-content: space-between;
@@ -141,6 +141,8 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    border-bottom: 2px #773ac5 solid;
 }
 
 header i {

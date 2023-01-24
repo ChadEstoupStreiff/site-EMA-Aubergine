@@ -6,6 +6,8 @@
             else
                 $ERROR = "Contactez l'Administrateur.";
             ViewManager::callGlobal("error", $ERROR);
+            require_once('view/footer.php');
+            die;
         }
     }
 
