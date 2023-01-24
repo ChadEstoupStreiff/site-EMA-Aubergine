@@ -48,72 +48,12 @@
                         $user->save();
                         User::disconnect();
                         header('location: ./?c=User');
-                    } else {
+                    } else
                         CustomError::callError("Les mots de passe ne sont pas égaux");
-                    }
                 } else
                     CustomError::callError("Captcha invalid");
-            } else {
+            } else
                 ViewManager::callUser("register");
-            }
-        }
-
-        public static function delete() {
-            if(UserUtils::askToConnectAndHasType("ADMIN")) {
-                if (array_key_exists('login', $_GET)) {
-                    $user = ModelUser::getByLogin($_GET['login']);
-                    if ($user != false) {
-                        if (($user->getType() == "PROF" || $user->getType() == "ADMIN") && !UserUtils::isAdmin()) {
-                            CustomError::callError("You can't access to this content");
-                        }
-                        $user->delete();
-                        header('location: ./?c=Administrateur');
-                    } else {
-                        CustomError::callError("No user with this login");
-                    }
-                } else {
-                    CustomError::callError("Define an login");
-                }
-            }
-            else{
-                CustomError::callError("You can't access to this content");
-            }
-        }
-
-        public static function regeneratepassword() {
-            if(UserUtils::askToConnectAndHasType("ADMIN")) {
-                if (array_key_exists('login', $_GET)) {
-                    $user = ModelUser::getByLogin($_GET['login']);
-                    if ($user != false) {
-                        if (($user->getType() == "PROF" || $user->getType() == "ADMIN") && !UserUtils::isAdmin()) {
-                            CustomError::callError("You can't access to this content");
-                        }
-
-                        $passwordClair = User::generateRandomString();
-                        $user->setPassword(password_hash($passwordClair,PASSWORD_BCRYPT));
-                        $user->save();
-
-                        ViewManager::callUser('newPass');
-                    } else {
-                        CustomError::callError("No user with this login");
-                    }
-                } else {
-                    CustomError::callError("Define an login");
-                }
-            }
-            else{
-                CustomError::callError("You can't access to this content");
-            }
-        }
-
-        private static function generateRandomString($length = 20) {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < $length; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
-            return $randomString;
         }
 
         public static function password() {
@@ -125,18 +65,14 @@
                             $user->setPassword(password_hash($_POST['newpass'],PASSWORD_BCRYPT));
                             $user->save();
                             User::disconnect();
-                        } else {
+                        } else
                             CustomError::callError("Passwords are not equals");
-                        }
-                    } else {
+                    } else
                         CustomError::callError("Old password incorrect");
-                    }
-                } else {
+                } else
                     ViewManager::callUser('passwordForm');
-                }
-            } else {
+            } else
                 UserUtils::askToConnect();
-            }
         }
 
         public static function informations() {
@@ -150,18 +86,16 @@
                     $var = $_SESSION["user_model"];
                     ViewManager::callUser('infoForm', $var);
                 }
-            } else {
+            } else
                 UserUtils::askToConnect();
-            }
         }
 
         public static function main()
         {
             if(UserUtils::isConnected()){
                 $var = $_SESSION["user_model"];
-                ViewManager::callUser('utilisateur', $var);
-            } else {
+                ViewManager::callUser('home', $var);
+            } else
                 UserUtils::askToConnect();
-            }
         }
     }

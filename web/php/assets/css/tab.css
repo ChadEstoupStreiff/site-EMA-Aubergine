@@ -1,0 +1,31 @@
+#tab {
+}
+
+.lines {
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 3vh;
+    width: 100%;
+    border: 1px #773ac5 solid;
+    padding: 10px;
+}
+
+.line p {
+    font-size: 2vh;
+    margin: 0 20px;
+    text-align: center;
+}
+
+.line select {
+    font-size: 1.4vh;
+    color: white;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px #773ac5 solid;
+    padding-bottom: 5px;
+}

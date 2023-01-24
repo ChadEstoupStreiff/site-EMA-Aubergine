@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS `User` (
 ALTER TABLE `User`
   ADD PRIMARY KEY (`login`);
 
+-- User: admin, mdp: admin
+INSERT INTO User (type, login, nickname, password) VALUES ("ADMIN", "admin", "Admin", "$2y$10$LxqroyFI2y1zgCrATdLZluN2y1oBwCWANeaMTPVY/U7CHM0Dbzvbe")

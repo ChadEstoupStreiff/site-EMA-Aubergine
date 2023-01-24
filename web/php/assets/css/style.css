@@ -16,8 +16,9 @@ body {
 /* TEXT */
 
 i {
-    font-size: 3.5vh;
+    font-size: 2vh;
     color: #773ac5;
+    margin: 0 10px;
 }
 
 hr {
@@ -52,6 +53,10 @@ p {
 a {
     text-decoration: none;
     color: #773ac5;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 input[type=text], input[type=password] {
@@ -125,7 +130,7 @@ input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover 
 
 /* PARTS */
 header {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(40, 40, 40);
     height: 5vh;
 
     padding: 0 3vw;
@@ -138,6 +143,10 @@ header {
     align-items: center;
 }
 
+header i {
+    font-size: 3.5vh;
+}
+
 #content {
     min-height: 95vh;
 }
@@ -147,6 +156,6 @@ footer {
     height: 3vh;
 }
 
-#menu i{
-    margin: 3vh;
+header i{
+    margin: 1vh;
 }
