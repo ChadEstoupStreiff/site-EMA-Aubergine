@@ -1,6 +1,7 @@
 <?
 // error_reporting(E_ERROR | E_PARSE);
 
+require_once('/var/www/config/Conf.php');
 require_once("model/ModelUser.php");
 require_once("utils/UserUtils.php");
 require_once("utils/ViewManager.php");

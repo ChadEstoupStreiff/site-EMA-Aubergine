@@ -11,22 +11,24 @@
         public static function connect()
         {
             if (array_key_exists("login", $_POST) && array_key_exists("password", $_POST)) {
-                $user = UserUtils::getUser($_POST["login"]);
-                if ($user != false) {
-                    $hashed_password = $user->getPassword();
-                    if (password_verify($_POST["password"], $hashed_password)) {
-                        $_SESSION["user_model"] = $user;
-    
-                        if (array_key_exists("redirection", $_COOKIE))
-                            header("location: " . $_COOKIE['redirection']);
-                        else
-                            User::main();
+                require_once "utils/ReCaptcha.php";
+                if (!Conf::isCaptchaEnable() || ReCaptchaUtils::checkValid()) {
+                    $user = UserUtils::getUser($_POST["login"]);
+                    if ($user != false) {
+                        $hashed_password = $user->getPassword();
+                        if (password_verify($_POST["password"], $hashed_password)) {
+                            $_SESSION["user_model"] = $user;
+        
+                            if (array_key_exists("redirection", $_COOKIE))
+                                header("location: " . $_COOKIE['redirection']);
+                            else
+                                User::main();
+                        } else
+                            CustomError::callError("Incorrect password");
                     } else
-                        CustomError::callError("Incorrect password");
+                        CustomError::callError("User does not exists");   
                 } else
-                    CustomError::callError("User does not exists");
-                
-                
+                    CustomError::callError("Captcha invalid");
             } else
                 ViewManager::callUser('connect');
         }
@@ -34,19 +36,23 @@
         public static function register() {
             
             if (array_key_exists("login", $_POST) && array_key_exists("password", $_POST) && array_key_exists("password-verify", $_POST)) {
-                $nickname = "";
-                if (array_key_exists("nickname", $_POST))
-                    $nickname = $_POST["nickname"];
-                else
-                    $nickname = $_POST["login"];
-                if (strcmp($_POST['password'], $_POST['password-verify']) == 0) {
-                    $user = new ModelUser("GUEST", $_POST["login"], $nickname, password_hash($_POST["password"],PASSWORD_BCRYPT ));
-                    $user->save();
-                    User::disconnect();
-                    header('location: ./?c=User');
-                } else {
-                    CustomError::callError("Les mots de passe ne sont pas égaux");
-                }
+                require_once "utils/ReCaptcha.php";
+                if (!Conf::isCaptchaEnable() || ReCaptchaUtils::checkValid()) {
+                    $nickname = "";
+                    if (array_key_exists("nickname", $_POST))
+                        $nickname = $_POST["nickname"];
+                    else
+                        $nickname = $_POST["login"];
+                    if (strcmp($_POST['password'], $_POST['password-verify']) == 0) {
+                        $user = new ModelUser("GUEST", $_POST["login"], $nickname, password_hash($_POST["password"],PASSWORD_BCRYPT ));
+                        $user->save();
+                        User::disconnect();
+                        header('location: ./?c=User');
+                    } else {
+                        CustomError::callError("Les mots de passe ne sont pas égaux");
+                    }
+                } else
+                    CustomError::callError("Captcha invalid");
             } else {
                 ViewManager::callUser("register");
             }

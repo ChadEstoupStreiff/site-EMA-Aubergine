@@ -146,3 +146,7 @@ footer {
     background-color: rgb(0, 0, 0);
     height: 3vh;
 }
+
+#menu i{
+    margin: 3vh;
+}
