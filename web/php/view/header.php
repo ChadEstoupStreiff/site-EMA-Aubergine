@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
         <title>EMA Aubergine</title>
         <link rel="stylesheet" href="assets/css/style.css" type="text/css">
         <script src="https://kit.fontawesome.com/7ab6419628.js" crossorigin="anonymous"></script>
