@@ -10,7 +10,7 @@
     <body>
 
         <header>
-            <a href="/"><i class="fas fa-home"></i></a>
+            <a href="/"><img src="assets/img/eggplant.png" alt="Aubergine"/></a>
             <div id="menu" class="inline responsive">
                 <?
                     if (UserUtils::isAdmin())
