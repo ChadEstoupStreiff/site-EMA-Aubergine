@@ -10,14 +10,26 @@
 
         <header>
             <a href="/"><i class="fas fa-home"></i></a>
-            <div id="menu" class="inline">
+            <div id="menu" class="inline responsive">
                 <?
                     if (UserUtils::isAdmin())
-                        echo "<a href=\"?c=Admin\"><i class=\"fas fa-cog\"></i></a>"
+                        echo "<a href=\"?c=Admin\"  class=\"headerhidden inline center\">
+                            <i class=\"fas fa-cog\"></i>
+                            <p>Admin</p>
+                        </a>"
                 ?>
-                <a href="https://www.facebook.com/groups/1700851880151381"><i class="fab fa-facebook"></i></i></a>
-                <a href="https://www.facebook.com/messages/t/2207624789268700"><i class="fab fa-facebook-messenger"></i></a>
-                <a href="?c=Pan"><i class="fas fa-dumbbell"></i></a>
+                <a href="https://www.facebook.com/groups/1700851880151381" class="headerhidden inline center">
+                    <i class="fab fa-facebook"></i></i>
+                    <p>Facebook</p>
+                </a>
+                <a href="https://www.facebook.com/messages/t/2207624789268700" class="headerhidden inline center">
+                    <i class="fab fa-facebook-messenger"></i>
+                    <p>Messenger</p>
+                </a>
+                <a href="?c=Pan" class="headerhidden inline center">
+                    <i class="fas fa-dumbbell"></i>
+                    <p>Blocs Pan</p>
+                </a>
             </div>
             <a href="?c=User"><i class="fas fa-user"></i></a>
         </header>

@@ -1,5 +1,4 @@
 function user_actions(div, user) {
-    console.log(user);
     let d = document.createElement("div");
     d.className = "inline center";
 

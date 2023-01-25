@@ -67,14 +67,14 @@ input[type=text], input[type=password] {
     margin: 3vh;
 
     border: 0;
-    border-bottom: 3px solid #773ac550;
+    border-bottom: 2px solid #773ac5;
     transition-duration: 0.5s;
 }
 
 input[type=text]:focus, input[type=password]:focus {
 
     border: 0;
-    border-bottom: 3px solid #773ac5;
+    border-bottom: 2px solid #773ac5;
 }
 
 /* SPECIAL */
@@ -145,6 +145,15 @@ header {
     border-bottom: 2px #773ac5 solid;
 }
 
+header .headerhidden p {
+    font-size: 0;
+    transition-duration: 0.5s;
+}
+
+header .headerhidden:hover p {
+    font-size: 2vh;
+}
+
 header i {
     font-size: 3.5vh;
 }
@@ -160,4 +169,18 @@ footer {
 
 header i{
     margin: 1vh;
+}
+
+@media only screen and (max-width: 1300px) {
+    .responsive {
+        flex-direction: column;
+    }
+
+    header {
+        height: auto;
+    }
+
+    header .headerhidden p {
+        font-size: 2vh;
+    }
 }
