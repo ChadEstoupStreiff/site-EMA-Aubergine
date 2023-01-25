@@ -183,4 +183,15 @@ header i{
     header .headerhidden p {
         font-size: 2vh;
     }
+
+
+    input[type=submit], .button, button {
+        cursor: pointer;
+        border-radius: 5vh;
+        background-color: #773ac5;
+    }
+
+    .red {
+        background-color: red;
+    }
 }
