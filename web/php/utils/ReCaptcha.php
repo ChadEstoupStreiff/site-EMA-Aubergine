@@ -2,9 +2,8 @@
 
 class ReCaptchaUtils {
     public static function checkValid() {
-        $secret = Conf::getCaptchaPrivateKey();
         $response = null;
-        $reCaptcha = new ReCaptcha($secret);
+        $reCaptcha = new ReCaptcha();
 
         if ($_POST["g-recaptcha-response"]) {
             $response = $reCaptcha->verifyResponse(
@@ -70,13 +69,9 @@ class ReCaptcha
      *
      * @param string $secret shared secret between site and ReCAPTCHA server.
      */
-    function ReCaptcha($secret)
+    public function __construct()
     {
-        if ($secret == null || $secret == "") {
-            die("To use reCAPTCHA you must get an API key from <a href='"
-                . self::$_signupUrl . "'>" . self::$_signupUrl . "</a>");
-        }
-        $this->_secret=$secret;
+        $this->_secret=Conf::getCaptchaPrivateKey();
     }
 
     /**
@@ -148,7 +143,6 @@ class ReCaptcha
             $recaptchaResponse->success = true;
         } else {
             $recaptchaResponse->success = false;
-            $recaptchaResponse->errorCodes = $answers [error-codes];
         }
 
         return $recaptchaResponse;
