@@ -31,8 +31,14 @@
                     <i class="fas fa-dumbbell"></i>
                     <p>Blocs Pan</p>
                 </a>
+                <a href="?c=Meme" class="headerhidden inline center">
+                    <i class="fa-regular fa-image"></i>
+                    <p>Best Même</p>
+                </a>
             </div>
-            <a href="?c=User"><i class="fas fa-user"></i></a>
+            <a href="?c=User">
+                <i class="fas fa-user"></i>
+            </a>
         </header>
 
         <div id="content" class="center">
