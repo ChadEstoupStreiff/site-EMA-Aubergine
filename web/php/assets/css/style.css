@@ -59,24 +59,6 @@ a:hover {
     cursor: pointer;
 }
 
-input[type=text], input[type=password] {
-    background-color: transparent;
-    text-align: center;
-
-    padding: 0.5vh;
-    margin: 3vh;
-
-    border: 0;
-    border-bottom: 2px solid #773ac5;
-    transition-duration: 0.5s;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-
-    border: 0;
-    border-bottom: 2px solid #773ac5;
-}
-
 /* SPECIAL */
 .center {
     display: flex;
@@ -101,6 +83,25 @@ div.error {
     flex-direction: column;
 }
 
+/* FORMS */
+input[type=text], input[type=password], select {
+    background-color: transparent;
+    text-align: center;
+
+    padding: 0.5vh;
+    margin: 3vh;
+
+    border: 0;
+    border-bottom: 2px solid #773ac5;
+    transition-duration: 0.5s;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+
+    border: 0;
+    border-bottom: 2px solid #773ac5;
+}
+
 input[type=submit], .button, button {
     font-size: 1.5vh;
     text-align: center;
@@ -119,6 +120,30 @@ input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover 
     background-color: #773ac5;
 }
 
+select {
+    max-height: 10vh;
+    font-size: 1.5vh;
+    color: white;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px #773ac5 solid;
+    padding-bottom: 5px;
+}
+
+textarea {
+    font-size: 1.5vh;
+    padding: 0.8vh;
+    height: 15vh;
+    min-height: 5vh;
+    width: 40vw;
+    min-width: 50%;
+
+    color: white;
+
+    background-color: transparent;
+    border: 2px #773ac5 solid;
+}
+
 .red {
     border: 1px red solid;
 }
@@ -126,6 +151,7 @@ input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover 
 .red:hover {
     background-color: red;
 }
+
 
 
 /* PARTS */

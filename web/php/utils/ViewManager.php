@@ -1,5 +1,9 @@
 <?
     class CustomError {
+        public static function call($message = NULL) {
+            CustomError::callError($message);
+        }
+
         public static function callError($message = NULL) {
             if (!is_null($message))
                 $ERROR = "Message: " . $message;
@@ -13,6 +17,14 @@
 
     class ViewManager {
         private static $has_header = false;
+
+        public static function callMeme($view, $var=NULL) {
+            ViewManager::callView("meme/" . $view, $var);
+        }
+
+        public static function callPan($view, $var=NULL) {
+            ViewManager::callView("pan/" . $view, $var);
+        }
 
         public static function callAdmin($view, $var=NULL) {
             ViewManager::callView("admin/" . $view, $var);
