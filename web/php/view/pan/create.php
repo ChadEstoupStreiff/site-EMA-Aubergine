@@ -5,7 +5,7 @@
         <input type="text" placeholder="Entrez le nom du bloc" name="name" required>
         <select name="dif" required>
             <option value="">Difficulté</option>
-            <option value="4 et -">4 et -</option>
+            <option value="4&-">4 et -</option>
             <option value="5">5</option>
             <option value="6a">6a</option>
             <option value="6a+">6a+</option>
@@ -19,7 +19,7 @@
             <option value="7b+">7b+</option>
             <option value="7c">7c</option>
             <option value="7c+">7c+</option>
-            <option value="8 et +">8 et +</option>
+            <option value="8&+">8 et +</option>
         </select>
         <div class="inline center">
             <select multiple name="types">
@@ -47,7 +47,7 @@
     <div class="inline center">
         <div class="center">
             <h2>Images</h2>
-            <input type="file" name="image" accept=".png, .jpeg, .jpg, .gif" multiple required>
+            <input type="file" name="images" accept=".png, .jpeg, .jpg, .gif" multiple required>
         </div>
         <div class="center">
             <h2>Video</h2>

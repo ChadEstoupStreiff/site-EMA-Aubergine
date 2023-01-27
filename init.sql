@@ -11,10 +11,10 @@ CREATE TABLE `Bloc` (
   `dif` varchar(3) NOT NULL,
   `creator` varchar(32) NOT NULL,
   `date` DATE NOT NULL,
-  `types` varchar(64),
+  `types` varchar(64) NOT NULL,
   `desc` varchar(256),
-  `images` varchar(256),
-  `videos` varchar(64),
+  `images` varchar(256) NOT NULL,
+  `video` varchar(64),
   CONSTRAINT PK_Bloc PRIMARY KEY (name),
   CONSTRAINT FK_Bloc_User FOREIGN KEY (creator) REFERENCES User(login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

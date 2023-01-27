@@ -9,10 +9,17 @@ class ModelBloc implements  Model {
     private $types;
     private $desc;
     private $images;
-    private $videos;
+    private $video;
 
-    public function __construct($name = NULL, $dif = NULL, $creator = NULL, $date = NULL, $types = NULL, $desc = NULL, $images = NULL, $videos = NULL) {
-        # TODO
+    public function __construct($name = NULL, $dif = NULL, $creator = NULL, $date = NULL, $types = NULL, $desc = NULL) {
+        $this->setName($name);
+        $this->setDif($dif);
+        $this->setCreator($creator);
+        $this->setDate($date);
+        $this->setTypes($types);
+        $this->setDesc($desc);
+        $this->images = json_encode([]);
+        $this->video = NULL;
     }
 
     ################
@@ -107,15 +114,19 @@ class ModelBloc implements  Model {
     ################
 
     public function save() {
-        if (self::getByLogin($this->getLogin()) == false) {
-            $sqlI = "INSERT INTO User (type, login, nickname, password) VALUES (:ty, :log, :nic, :pwd)";
+        if (self::getByName($this->getName()) == false) {
+            $sqlI = "INSERT INTO `Bloc`(`name`, `dif`, `creator`, `date`, `types`, `desc`, `images`, `video`) VALUES (:name, :dif, :creator, :date, :types, :desc, :images, :video)";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sqlI);
                 $values = array(
-                    "ty" => $this->type,
-                    "log" => $this->login,
-                    "nic" => $this->nickname,
-                    "pwd" => $this->password
+                    "name" => $this->name,
+                    "dif" => $this->dif,
+                    "creator" => $this->creator,
+                    "date" => $this->date,
+                    "types" => $this->types,
+                    "desc" => $this->desc,
+                    "images" => $this->images,
+                    "video" => $this->video
                 );
                 $req_prep->execute($values);
                 return true;
@@ -124,14 +135,18 @@ class ModelBloc implements  Model {
                 return false;
             }
         } else {
-            $sql = "UPDATE User SET type = :ty, nickname = :nic, password = :pwd WHERE login = :log";
+            $sql = "UPDATE `Bloc` SET `dif` = :dif, `creator` = :creator, `date` = :date, `types` = :types, `desc` = :desc, `images` = :images, `video` = :video WHERE `name` = :name";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sql);
                 $values = array(
-                    "ty" => $this->type,
-                    "log" => $this->login,
-                    "nic" => $this->nickname,
-                    "pwd" => $this->password
+                    "name" => $this->name,
+                    "dif" => $this->dif,
+                    "creator" => $this->creator,
+                    "date" => $this->date,
+                    "types" => $this->types,
+                    "desc" => $this->desc,
+                    "images" => $this->images,
+                    "video" => $this->video
                 );
                 $req_prep->execute($values);
                 return true;
@@ -143,10 +158,10 @@ class ModelBloc implements  Model {
     }
 
     public function delete(){
-        $sql = "DELETE FROM User WHERE login = :login";
+        $sql = "DELETE FROM Bloc WHERE name = :name";
         try {
             $req_prep = DBCom::getPDO()->prepare($sql);
-            $values = array("login" => $this->login);
+            $values = array("name" => $this->getName());
             $req_prep->execute($values);
             return true;
         } catch(PDOException $e) {
@@ -157,31 +172,48 @@ class ModelBloc implements  Model {
     }
 
     public function update() {
-        $UserRecovered = self::getByLogin($this->getLogin());
-        $this->setType($UserRecovered->getType());
-        $this->setLogin($UserRecovered->getLogin());
-        $this->setNickName($UserRecovered->getNickName());
-        $this->setPassword($UserRecovered->getPassword());
+        $blocRecovered = self::getByName($this->getName());
+        $this->setDif($blocRecovered->getDif());
+        $this->setCreator($blocRecovered->getCreator());
+        $this->setDate($blocRecovered->getDate());
+        $this->setTypes($blocRecovered->getTypes());
+        $this->setDesc($blocRecovered->getDesc());
     }
 
     ################
     ##   GETTER   ##
     ################
 
-    public function getType() {
-        return $this->type;
+    public function getName() {
+        return $this->name;
     }
 
-    public function getNickName() {
-        return $this->nickname;
+    public function getDif() {
+        return $this->dif;
     }
 
-    public function getLogin() {
+    public function getCreator() {
         return $this->login;
     }
 
-    public function getPassword() {
-        return $this->password;
+    public function getDate() {
+        return $this->date;
+    }
+
+    public function getTypes() {
+        return json_decode($this->types, true);
+    }
+
+    public function getDesc() {
+        return $this->desc;
+    }
+
+    public function getImages() {
+        return json_decode($this->images, true);
+    }
+
+    public function getVideo() {
+        return json_decode($this->video, true);
     }
 
 
@@ -189,43 +221,63 @@ class ModelBloc implements  Model {
     ##   SETTER   ##
     ################
 
-    public function setType($ty) {
-        if (!is_null($ty)) {
-            if (strlen($ty) <= 8) {
-                $this->type = $ty;
-            } else {
-                CustomError::callError("Le type de permission ne doit pas dépasser les 8 caractères");
-            }
-        }
-    }
-
-    public function setLogin($login) {
-        if (!is_null($login)) {
-            if (strlen($login) <= 32) {
-                $this->login = $login;
+    public function setName($name) {
+        if (!is_null($name)) {
+            if (strlen($name) <= 32) {
+                $this->name = $name;
             } else {
                 CustomError::callError("Le nom ne doit pas dépasser les 32 caractères");
             }
         }
     }
 
-    public function setNickName($nickname) {
-        if (!is_null($nickname)) {
-            if (strlen($nickname) <= 32) {
-                $this->nickname = $nickname;
+    public function setDif($dif) {
+        if (!is_null($dif)) {
+            if (strlen($dif) <= 32) {
+                $this->dif = $dif;
             } else {
-                CustomError::callError("Le pseudo ne doit pas dépasser les 32 caractères");
+                CustomError::callError("La difficulté ne doit pas dépasser les 3 caractères");
             }
         }
     }
 
-    public function setPassword($pwd) {
-        if (!is_null($pwd)) {
-            if (strlen($pwd) <= 60) {
-                $this->password = $pwd;
+    public function setCreator($creator) {
+        if (!is_null($creator)) {
+            $this->creator = $creator;
+        }
+    }
+
+    public function setDate($date) {
+        if (!is_null($date)) {
+            $this->date = $date;
+        }
+    }
+
+    public function setTypes($types) {
+        if (!is_null($types)) {
+            if (sizeof($types) <= 5) {
+                $this->types = json_encode($types);
             } else {
-                CustomError::callError("Le mot de passe  ne doit pas dépasser les 60 caractères");
+                CustomError::callError("Les ne doit pas dépasser les 5 types");
             }
         }
+    }
+
+    public function setDesc($desc) {
+        if (!is_null($desc)) {
+            if (strlen($desc) <= 256) {
+                $this->desc = $desc;
+            } else {
+                CustomError::callError("La description ne doit pas dépasser les 256 caractères");
+            }
+        }
+    }
+
+    public function updateImages($images) {
+        // TODO
+    }
+
+    public function updateVideo($video) {
+        // TODO
     }
 }
