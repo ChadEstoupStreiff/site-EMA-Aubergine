@@ -7,7 +7,7 @@
         static public function create() {
             if (UserUtils::askToConnectAndHasType("OUVREUR")) {
                 if (array_key_exists("name", $_POST)) {
-                    echo "todo";
+                    header("location: ?c=Pan&f=see&name=test");
                 } else
                     ViewManager::callPan("create");
             } else

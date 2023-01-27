@@ -1,6 +1,6 @@
 <h1 class="lettopclear">Ouvrir un bloc</h1>
 <hr/>
-<form method="post" action="./?c=User&f=register" class="center">
+<form method="post" action="./?c=Pan&f=create" class="center">
     <div class="inline center responsive">
         <input type="text" placeholder="Entrez le nom du bloc" name="name" required>
         <select name="dif" required>
@@ -22,11 +22,20 @@
             <option value="8 et +">8 et +</option>
         </select>
         <div class="inline center">
-            <select multiple name="types" required>
-                <option value="Classique">Classique</option>
+            <select multiple name="types">
+                <option valie="Force">Force</option>
+                <option valie="Technique">Technique</option>
                 <option value="Reglettes">Reglettes</option>
                 <option value="Morphologie">Morphologie</option>
                 <option valie="Jetté">Jetté</option>
+                <option valie="Dalle">Dalle</option>
+                <option valie="Devert">Devert</option>
+                <option valie="Surplomb">Surplomb</option>
+                <option valie="Prou">Prou</option>
+                <option valie="Japoneserie">Japoneserie</option>
+                <option valie="Grégoire (mutant)">Grégoire (mutant)</option>
+                <option valie="Dièdre">Dièdre</option>
+                <option valie="Run & Jump & Skate">Run & Jump & Skate</option>
             </select>
             <div class="center">
                 <p>CTRL + Clic</p><p>pour</p><p>selectionner</p><p> plusieurs</p>
@@ -35,14 +44,15 @@
     </div>
 
 
-    <label><h2>Fichiers</h2></label>
     <div class="inline center">
-    <input type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg">
-       <input type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg">
+        <div class="center">
+            <h2>Images</h2>
+            <input type="file" name="image" accept=".png, .jpeg, .jpg, .gif" multiple required>
+        </div>
+        <div class="center">
+            <h2>Video</h2>
+            <input type="file" name="video" accept=".mp4, .avi, .mkv">
+        </div>
     </div>
     
 

@@ -120,8 +120,12 @@ input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover 
     background-color: #773ac5;
 }
 
+input[type='file'] {
+    color: gray;
+}
+
 select {
-    max-height: 10vh;
+    max-height: 8vh;
     font-size: 1.5vh;
     color: white;
     background-color: transparent;
