@@ -1,4 +1,4 @@
-<h2>Bonjour <a href="?c=User&f=see&login=<? $var->getLogin() ?>"><?php echo $var->getNickName()?></a> !</h2>
+<h2>Bonjour <a href="?c=User&f=see&login=<? echo $var->getLogin() ?>"><?php echo $var->getNickName()?></a> !</h2>
 
 <hr/>
 
