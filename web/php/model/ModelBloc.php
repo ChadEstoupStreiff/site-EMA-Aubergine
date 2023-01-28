@@ -289,8 +289,8 @@ class ModelBloc implements  Model {
     }
 
     public function updateImages($images) {
-        if (count($images["name"]) > 4) {
-            CustomError::call("Tu ne peux pas upload plus de 4 images");
+        if (count($images["name"]) > 3) {
+            CustomError::call("Tu ne peux pas upload plus de 3 images");
         } else {
             $folder = "files/blocs/" . $this->name . "/images/"; 
             if (!file_exists($folder)) {

@@ -220,6 +220,11 @@ header img {
         flex-direction: column;
     }
 
+    img, video {
+        max-width: 90vw;
+        max-height: 60vh;
+    }
+
     header {
         height: auto;
     }
