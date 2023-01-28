@@ -11,7 +11,7 @@ services:
       - ema_aubergine_database
     build:
       context: ./web
-    container_name: front_ema_aubergine
+    container_name: ema_aubergine_web
     restart: always
     volumes:
       - ./web/php/:/var/www/html/
