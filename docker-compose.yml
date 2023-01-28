@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-  #TODO back-end app
   ema_aubergine_web:
     env_file:
       - .env
