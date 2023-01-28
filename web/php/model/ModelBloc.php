@@ -18,8 +18,8 @@ class ModelBloc implements  Model {
         $this->setDate($date);
         $this->setTypes($types);
         $this->setDesc($desc);
-        $this->images = json_encode([]);
-        $this->video = NULL;
+        if ($this->images == NULL)
+            $this->images = "[]";
     }
 
     ################
@@ -193,7 +193,7 @@ class ModelBloc implements  Model {
     }
 
     public function getCreator() {
-        return $this->login;
+        return $this->creator;
     }
 
     public function getDate() {
@@ -213,7 +213,21 @@ class ModelBloc implements  Model {
     }
 
     public function getVideo() {
-        return json_decode($this->video, true);
+        return $this->video;
+    }
+
+    public function getImagesPath() {
+        $images = [];
+        foreach (json_decode($this->images) as $f) {
+            $images[] = "files/blocs/" . $this->name . "/images/" . $f;
+        } 
+        return $images;
+    }
+
+    public function getVideoPath() {
+        if ($this->video == NULL)
+            return NULL;
+        return "files/blocs/" . $this->name . "/" . $this->video;
     }
 
 
@@ -222,6 +236,7 @@ class ModelBloc implements  Model {
     ################
 
     public function setName($name) {
+        // TODO move files
         if (!is_null($name)) {
             if (strlen($name) <= 32) {
                 $this->name = $name;
@@ -258,7 +273,7 @@ class ModelBloc implements  Model {
             if (sizeof($types) <= 5) {
                 $this->types = json_encode($types);
             } else {
-                CustomError::callError("Les ne doit pas dépasser les 5 types");
+                CustomError::callError("Un bloc ne peut pas dépasser les 5 types");
             }
         }
     }
@@ -274,10 +289,54 @@ class ModelBloc implements  Model {
     }
 
     public function updateImages($images) {
-        // TODO
+        if (count($images["name"]) > 4) {
+            CustomError::call("Tu ne peux pas upload plus de 4 images");
+        } else {
+            $folder = "files/blocs/" . $this->name . "/images/"; 
+            if (!file_exists($folder)) {
+                mkdir($folder, 0777, true);
+            } else {
+                foreach (json_decode($this->images) as $f) {
+                    unlink($folder . $f);
+                }
+            }
+            $new_images = [];
+    
+            for( $i=0 ; $i < count($images['name']) ; $i++ ) {
+    
+                $tmpFilePath = $images['tmp_name'][$i];
+                if ($tmpFilePath != "") {
+                    $fileExt = explode('.', $images['name'][$i]);
+                    $newName = uniqid('', true) . '.' . strtolower(end($fileExt));
+                    
+                    if (move_uploaded_file($tmpFilePath, $folder . $newName)) {
+                        $new_images[] = $newName;
+                    }
+                }
+            }
+    
+            $this->images = json_encode($new_images);
+        }
     }
 
     public function updateVideo($video) {
-        // TODO
+        $folder = "files/blocs/" . $this->name . "/";
+        if (!file_exists($folder)) {
+            mkdir($folder, 0777, true);
+        } else if ($this->video != NULL) {
+            unlink($folder . $this->video);
+        }
+
+        if ($video != NULL) {
+            $tmpFilePath = $video['tmp_name'];
+            if ($tmpFilePath != "") {
+                $fileExt = explode('.', $video['name']);
+                $newName = uniqid('', true) . '.' . strtolower(end($fileExt));
+
+                if (move_uploaded_file($tmpFilePath, $folder . $newName)) {
+                    $this->video = $newName;
+                }
+            }
+        }
     }
 }

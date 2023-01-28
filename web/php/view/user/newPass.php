@@ -1,1 +1,1 @@
-<h1>Nouveau mot de passe: <?php echo $var;?></h1>
+<h2>Nouveau mot de passe: <?php echo $var;?></h2>

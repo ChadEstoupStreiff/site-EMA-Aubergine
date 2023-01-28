@@ -1,6 +1,6 @@
-<h1 class="lettopclear">Ouvrir un bloc</h1>
+<h2 class="lettopclear">Ouvrir un bloc</h2>
 <hr/>
-<form method="post" action="./?c=Pan&f=create" class="center">
+<form method="post" action="./?c=Pan&f=create" class="center" enctype="multipart/form-data">
     <div class="inline center responsive">
         <input type="text" placeholder="Entrez le nom du bloc" name="name" required>
         <select name="dif" required>
@@ -22,7 +22,7 @@
             <option value="8&+">8 et +</option>
         </select>
         <div class="inline center">
-            <select multiple name="types">
+            <select multiple name="types[]">
                 <option valie="Force">Force</option>
                 <option valie="Technique">Technique</option>
                 <option value="Reglettes">Reglettes</option>
@@ -44,19 +44,18 @@
     </div>
 
 
-    <div class="inline center">
+    <div class="center">
         <div class="center">
-            <h2>Images</h2>
-            <input type="file" name="images" accept=".png, .jpeg, .jpg, .gif" multiple required>
+            <h3>Images</h3>
+            <input type="file" name="images[]" accept=".png, .jpeg, .jpg, .gif" multiple required>
         </div>
         <div class="center">
-            <h2>Video</h2>
+            <h3>Video</h3>
             <input type="file" name="video" accept=".mp4, .avi, .mkv">
         </div>
     </div>
     
 
-    <label>Description</label>
     <textarea name="desc" placeholder="Ecrire la description du bloc"></textarea>
 
     <button type="submit" class="submit-btn">Créer</button>

@@ -11,7 +11,7 @@ CREATE TABLE `Bloc` (
   `dif` varchar(3) NOT NULL,
   `creator` varchar(32) NOT NULL,
   `date` DATE NOT NULL,
-  `types` varchar(64) NOT NULL,
+  `types` varchar(128) NOT NULL,
   `desc` varchar(256),
   `images` varchar(256) NOT NULL,
   `video` varchar(64),
@@ -20,4 +20,4 @@ CREATE TABLE `Bloc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- User: admin, mdp: admin
-INSERT INTO User (type, login, nickname, password) VALUES ("ADMIN", "admin", "Admin", "$2y$10$LxqroyFI2y1zgCrATdLZluN2y1oBwCWANeaMTPVY/U7CHM0Dbzvbe")
+INSERT INTO User (type, login, nickname, password) VALUES ("ADMIN", "admin", "Administrateur", "$2y$10$LxqroyFI2y1zgCrATdLZluN2y1oBwCWANeaMTPVY/U7CHM0Dbzvbe")
