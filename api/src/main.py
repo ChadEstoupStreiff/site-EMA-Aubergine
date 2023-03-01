@@ -8,16 +8,6 @@ cur = get_cursor(config)
 app = FastAPI()
 
 
-def loop_cursor_values():
-    tab = []
-    for values in cur:
-        obj = {}
-        for i in range(len(cur.description)):
-            obj[cur.description[i]] = values[i]
-        tab.append(obj)
-    return tab
-
-
 @app.get("/users")
 async def get_users(page: int = 0, pageSize: int = 10, regex: str = None):
     request = RequestBuilder(cur, ["login", "nickname", "type"], "User")
