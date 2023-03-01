@@ -21,7 +21,6 @@ if (UserUtils::hasType("OUVREUR")) {
     <script src='assets/js/Tab.js'></script>
     <script src='assets/js/mybloc_list.js'></script>
     
-    <div id='tab'>
-    </div>";
+    <div id='tab-myblocs'>" . Conf::getAPI() . "/blocs</div>";
 }
 ?>

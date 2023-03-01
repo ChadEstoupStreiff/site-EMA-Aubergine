@@ -1,5 +1,7 @@
 <?
+    die;
 
+    
     require_once("../utils/UserUtils.php");
 
     function get_users() {

@@ -1,54 +1,45 @@
 from fastapi import FastAPI
-import mariadb
-import sys
 from dotenv import dotenv_values
-import json
+from sql import RequestBuilder, get_cursor
 
-# Get ENV values
+
 config = dotenv_values(".env")
-
-# Connect to MariaDB Platform
-try:
-    conn = mariadb.connect(
-        user="root",
-        password=config["SQL_ROOTPASSWORD"],
-        host="ema_aubergine_database",
-        port=3306,
-        database=config["SQL_DATABASE"]
-
-    )
-except mariadb.Error as e:
-    print(f"Error connecting to MariaDB Platform: {e}")
-    sys.exit(1)
-cur = conn.cursor(prepared=True)
-
-# Launch fastAPI
+cur = get_cursor(config)
 app = FastAPI()
+
+
+def loop_cursor_values():
+    tab = []
+    for values in cur:
+        obj = {}
+        for i in range(len(cur.description)):
+            obj[cur.description[i]] = values[i]
+        tab.append(obj)
+    return tab
 
 
 @app.get("/users")
 async def get_users(page: int = 0, pageSize: int = 10, regex: str = None):
-    query = "SELECT login, nickname, type FROM User"
-    values = ()
+    request = RequestBuilder(cur, ["login", "nickname", "type"], "User")
+    return request.execute()
 
-    cur.execute(query, values)
-    
-    tab = []
-    for (login, nickname, type) in cur:
-        tab.append([login, nickname, type])
 
-    return json.dumps(tab).replace('\\"',"\"")
+@app.get("/user/{login}")
+async def get_user(login: str):
+    request = RequestBuilder(cur, ["login", "nickname", "type"], "User")
+    request.add_condition("login", "%s")
+    return request.execute(values=(login,))
 
 
 @app.get("/blocs")
 async def get_blocs(page: int = 0, pageSize: int = 10, regex: str = None):
-    query = "SELECT name, dif, creator, date FROM Bloc"
-    values = ()
+    request = RequestBuilder(cur, ["name", "dif", "creator", "date"], "Bloc")
+    return request.execute()
 
-    cur.execute(query, values)
-    
-    tab = []
-    for (name, dif, creator, date) in cur:
-        tab.append([name, dif, creator, date.strftime("%Y-%m-%d")])
 
-    return json.dumps(tab).replace('\\"',"\"")
+@app.get("/bloc/{name}")
+async def get_bloc(name: str):
+    # TODO add desc
+    request = RequestBuilder(cur, ["name", "dif", "creator", "date", "types", "images", "video"], "Bloc")
+    request.add_condition("name", "%s")
+    return request.execute(values=(name,))

@@ -47,6 +47,6 @@ function user_actions(div, user) {
 
 let table = null;
 window.onload = function() {
-    table = new Tab("http://localhost:8087/users", [""], user_actions);
+    table = new Tab("tab-users", [], user_actions);
     table.update();
 }

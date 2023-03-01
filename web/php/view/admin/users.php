@@ -2,5 +2,4 @@
 <script src='assets/js/Tab.js'></script>
 <script src='assets/js/user_list.js'></script>
 
-<div id="tab">
-</div>
+<div id="tab-users"><? echo Conf::getAPI() ?>/users</div>

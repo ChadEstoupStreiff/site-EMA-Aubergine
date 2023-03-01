@@ -1,24 +1,23 @@
-function getJSONAPI(url) {
+async function getJSONAPI(url) {
     const request = new XMLHttpRequest();
-    request.open('GET', encodeURIComponent(url), false);  // `false` makes the request synchronous
-    request.send(null);
 
-    if (request.status === 200)
-        return JSON.parse(request.responseText);
-    else
-        return null;
+    console.log(url);
+    const response = await fetch(url);
+    return response.json();
 }
 
 class Tab {
     static PAGE_SIZE = 10;
 
-    constructor(api_url, legends, action_callback) {
-        this.api_url = api_url;
+    constructor(div_id, legends, action_callback) {
+        this.table = document.getElementById(div_id);
+        this.api_url = this.table.innerHTML;
+        this.table.innerHTML = "";
+
         this.page = 0;
         this.regex = "";
         this.action_callback = action_callback;
 
-        this.table = document.getElementById("tab");
         this.init();
     }
 
@@ -57,15 +56,16 @@ class Tab {
         this.table.appendChild(this.lines);
     }
 
-    update() {
+    async update() {
         console.log("Table update");
         this.regex = this.input.value;
-
-        tab = getJSONAPI(this.api_url + "&pageSize=" + Tab.PAGE_SIZE + "&page=" + this.page + "&regex=" + this.regex);
+        var tab = await getJSONAPI(this.api_url + "?pageSize=" + Tab.PAGE_SIZE + "&page=" + this.page + "&regex=" + this.regex);
+        
+        console.log(tab);
+        while (this.lines.childNodes.length > 0) {
+            this.lines.removeChild(this.lines.firstChild);
+        }
         if (tab.length > 0) {
-            while (this.lines.childNodes.length > 0) {
-                this.lines.removeChild(this.lines.firstChild);
-            }
             this.pageElement.innerHTML = this.page;
     
             

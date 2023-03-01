@@ -6,6 +6,7 @@
         static private $secret_re_captcha_public = "XXX-XXX";
         static private $secret_re_captcha_private = "XXX-XXX";
         static private $domain = "chades.fr";
+        static private $api = "ema-aubergine.chades.fr/api";
 
         static public function isPhpLogEnable() {
             return self::$enable_captcha;
@@ -25,5 +26,9 @@
 
         static public function getDomain() {
             return self::$domain;
+        }
+
+        static public function getAPI() {
+            return self::$api;
         }
     }

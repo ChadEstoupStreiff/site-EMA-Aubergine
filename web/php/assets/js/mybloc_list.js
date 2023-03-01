@@ -22,6 +22,6 @@ function user_bloc(div, bloc) {
 
 let table = null;
 window.onload = function() {
-    table = new Tab("api?f=blocs&onlymine", [""], user_bloc);
+    table = new Tab("tab-myblocs", [], user_bloc);
     table.update();
 }
