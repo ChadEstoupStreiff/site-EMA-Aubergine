@@ -1,6 +1,6 @@
 <?
     if (UserUtils::hasType("OUVREUR")) {
-        echo "<h1>Vous êtes ouvreur !</h1><a href='?&c=Pan&f=create' class='button'>Créer un bloc</a><hr/>";
+        echo "<h2>Vous êtes ouvreur !</h2><a href='?&c=Pan&f=create' class='button'>Créer un bloc</a><hr/>";
     }
 ?>
 

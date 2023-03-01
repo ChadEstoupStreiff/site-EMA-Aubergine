@@ -27,7 +27,7 @@ hr {
     color: #773ac5;
 }
 
-h1, h2, h3, p, a, input {
+h1, h2, h3, p, a, input, textarea {
     font-family: Lato, sans-serif, monospace;
     color: rgb(200, 200, 200);
     text-align: justify;
@@ -35,19 +35,19 @@ h1, h2, h3, p, a, input {
 }
 
 h1 {
+    font-size: 7vh;
+}
+
+h2 {
     font-size: 5vh;
 }
 
-h2, input {
-    font-size: 2vh;
-}
-
 h3 {
-    font-size: 1.5vh;
+    font-size: 2.6vh;
 }
 
-p {
-    font-size: 1vh;
+p, input {
+    font-size: 1.8vh;
 }
 
 a {
@@ -57,6 +57,13 @@ a {
 
 a:hover {
     cursor: pointer;
+}
+
+img, video {
+    margin: 3vh;
+    max-width: 25vw;
+    max-height: 40vh;
+    border-radius: 3vh;
 }
 
 /* SPECIAL */
@@ -89,7 +96,7 @@ input[type=text], input[type=password], select {
     text-align: center;
 
     padding: 0.5vh;
-    margin: 3vh;
+    margin: 2vh;
 
     border: 0;
     border-bottom: 2px solid #773ac5;
@@ -122,6 +129,7 @@ input[type=submit]:hover, input[type=submit]:focus, .button:hover, button:hover 
 
 input[type='file'] {
     color: gray;
+    margin-bottom: 2vh;
 }
 
 select {
@@ -135,6 +143,7 @@ select {
 }
 
 textarea {
+    margin: 2vh;
     font-size: 1.5vh;
     padding: 0.8vh;
     height: 15vh;
@@ -189,7 +198,8 @@ header i {
 }
 
 #content {
-    min-height: 95vh;
+    padding: 5vh 10vw;
+    min-height: 85vh;
 }
 
 footer {
@@ -210,12 +220,21 @@ header img {
         flex-direction: column;
     }
 
+    img, video {
+        max-width: 90vw;
+        max-height: 60vh;
+    }
+
     header {
         height: auto;
     }
 
     header .headerhidden p {
         font-size: 2vh;
+    }
+
+    #content {
+        padding: 5vh 3vw;
     }
 
 

@@ -1,9 +1,9 @@
-<h1>Connexion</h1>
+<h2>Connexion</h2>
 <hr />
 <form action="./?c=User&f=connect" method="post" class="center">
-    <label><h2>Utilisateur</h2></label>
+    <label><h3>Utilisateur</h3></label>
     <input type="text" name="login" placeholder="Entrez votre nom d'utilisateur" required>
-    <label><h2>Mot de passe</h2></label>
+    <label><h3>Mot de passe</h3></label>
     <input type="password" name="password" placeholder="Entrez votre mot de passe" required>
     <?
         if (Conf::isCaptchaEnable()) {
