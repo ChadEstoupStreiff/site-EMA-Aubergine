@@ -1,6 +1,26 @@
 version: '3'
 
 services:
+  ema_aubergine_api:
+    env_file:
+      - .env
+    depends_on:
+      - ema_aubergine_database
+    links:
+      - ema_aubergine_database
+    build:
+      context: ./api
+    container_name: ema_aubergine_api
+    restart: always
+    volumes:
+      - ./api/src:/app
+      - .env:/app/.env
+
+    ports:
+      - ${API_PORT}:80
+    networks:
+      - ema_aubergine
+
   ema_aubergine_web:
     env_file:
       - .env

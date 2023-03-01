@@ -1,0 +1,6 @@
+mariadb==1.0.11
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+python-dotenv

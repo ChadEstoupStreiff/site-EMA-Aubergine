@@ -1,4 +1,7 @@
 <?
+
+    require_once("../utils/UserUtils.php");
+
     function get_users() {
         $pageSize = array_key_exists("pageSize", $_GET) != null ? $_GET["pageSize"] : null;
         $page = array_key_exists("page", $_GET) != null ? $_GET["page"] : null;
@@ -33,14 +36,21 @@
         $pageSize = array_key_exists("pageSize", $_GET) != null ? $_GET["pageSize"] : null;
         $page = array_key_exists("page", $_GET) != null ? $_GET["page"] : null;
         $regex = array_key_exists("regex", $_GET) != null ? $_GET["regex"] : null;
+        $creator = array_key_exists("creator", $_GET) != null ? boolval($_GET["creator"]) : null;
 
         
         if ((is_numeric($pageSize) || $pageSize == null) && (is_numeric($page) || $page == null)) {
-            $sql = "SELECT name, dif, creator, date, types FROM Bloc";
+            $sql = "SELECT name, dif, creator, date FROM Bloc";
             $values = array();
-            if ($regex != null) {
-                $sql = $sql . " WHERE name LIKE :regex OR creator LIKE :regex";
-                $values["regex"] = "%" . $regex . "%";
+            if ($regex != null || $creator != null) {
+                $sql = $sql . " WHERE";
+                if ($regex != null) {
+                    $sql = $sql . " name LIKE :regex OR creator LIKE :regex";
+                    $values["regex"] = "%" . $regex . "%";
+                } if ($creator != null && $creator == True) {
+                    $sql = $sql . "creator = :creator";
+                    $values["creator"] = $creator;
+                }
             }
             if ($pageSize != null && $page != null)
                 $sql = $sql . " LIMIT " . $pageSize . " OFFSET " . $page * $pageSize;

@@ -1,6 +1,6 @@
 function getJSONAPI(url) {
     const request = new XMLHttpRequest();
-    request.open('GET', url, false);  // `false` makes the request synchronous
+    request.open('GET', encodeURIComponent(url), false);  // `false` makes the request synchronous
     request.send(null);
 
     if (request.status === 200)
@@ -34,7 +34,7 @@ class Tab {
             this.update();
         });
         div.appendChild(b)
-        this.pageElement = document.createElement("h2");
+        this.pageElement = document.createElement("h3");
         this.pageElement.innerHTML = 0;
         div.appendChild(this.pageElement);
         b = document.createElement("button");
