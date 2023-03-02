@@ -9,7 +9,7 @@ async function getJSONAPI(url) {
 class Tab {
     static PAGE_SIZE = 10;
 
-    constructor(div_id, legends, action_callback) {
+    constructor(div_id, filters, action_callback) {
         this.table = document.getElementById(div_id);
         this.api_url = this.table.innerHTML;
         this.table.innerHTML = "";
