@@ -25,7 +25,7 @@ cp web/config_ex web/config -R
 ```  
 Make sure permissions are corrects
 ```bash
-sudo chown www-data:root . -R
+sudo chown www-data . -R
 sudo chmod 775 . -R
 ```
 launch docker wit command  
