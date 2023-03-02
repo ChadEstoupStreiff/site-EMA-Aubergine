@@ -69,7 +69,7 @@ class Tab {
             this.pageElement.innerHTML = this.page;
     
             
-            for (let i = Tab.PAGE_SIZE * this.page; i < Tab.PAGE_SIZE * (this.page+1) && i < tab.length; i++) {
+            for (let i = 0; i < tab.length; i++) {
                 let element = tab[i];
     
                 let div = document.createElement("div");
@@ -82,9 +82,9 @@ class Tab {
                     this.action_callback(actions, element);
                 }
     
-                for (let value of element) {
+                for (const key in element) {
                     let p = document.createElement("p");
-                    p.innerHTML = value;
+                    p.innerHTML = element[key];
                     div.appendChild(p);
                 }
             }

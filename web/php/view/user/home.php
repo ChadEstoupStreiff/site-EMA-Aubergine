@@ -18,9 +18,10 @@ if (UserUtils::hasType("OUVREUR")) {
     <a href='?&c=Pan&f=create' class='button'>Créer un bloc</a>";
     echo "
     <link rel='stylesheet' href='assets/css/tab.css' type='text/css'>
-    <script src='assets/js/Tab.js'></script>
-    <script src='assets/js/mybloc_list.js'></script>
+    <script src='assets/js/table/Tab.js'></script>
+    <script src='assets/js/table/actions/bloc_full.js'></script>
+    <script src='assets/js/table/loaders/tab_blocs.js'></script>
     
-    <div id='tab-myblocs'>" . Conf::getAPI() . "/blocs</div>";
+    <div id='tab-blocs'>" . Conf::getAPI() . "/user/" . UserUtils::getLogin() . "/blocs</div>";
 }
 ?>

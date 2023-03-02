@@ -10,7 +10,6 @@ def get_cursor(config):
             host="ema_aubergine_database",
             port=3306,
             database=config["SQL_DATABASE"]
-
         )
     except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")

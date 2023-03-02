@@ -3,21 +3,21 @@ require_once('./model/Model.php');
 class ModelBloc implements  Model {
 
     private $name;
-    private $dif;
+    private $difficulty;
     private $creator;
     private $date;
     private $types;
-    private $desc;
+    private $description;
     private $images;
     private $video;
 
-    public function __construct($name = NULL, $dif = NULL, $creator = NULL, $date = NULL, $types = NULL, $desc = NULL) {
+    public function __construct($name = NULL, $difficulty = NULL, $creator = NULL, $date = NULL, $types = NULL, $description = NULL) {
         $this->setName($name);
-        $this->setDif($dif);
+        $this->setDifficulty($difficulty);
         $this->setCreator($creator);
         $this->setDate($date);
         $this->setTypes($types);
-        $this->setDesc($desc);
+        $this->setDescription($description);
         if ($this->images == NULL)
             $this->images = "[]";
     }
@@ -115,16 +115,16 @@ class ModelBloc implements  Model {
 
     public function save() {
         if (self::getByName($this->getName()) == false) {
-            $sqlI = "INSERT INTO `Bloc`(`name`, `dif`, `creator`, `date`, `types`, `desc`, `images`, `video`) VALUES (:name, :dif, :creator, :date, :types, :desc, :images, :video)";
+            $sqlI = "INSERT INTO `Bloc`(`name`, `difficulty`, `creator`, `date`, `types`, `description`, `images`, `video`) VALUES (:name, :difficulty, :creator, :date, :types, :description, :images, :video)";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sqlI);
                 $values = array(
                     "name" => $this->name,
-                    "dif" => $this->dif,
+                    "difficulty" => $this->difficulty,
                     "creator" => $this->creator,
                     "date" => $this->date,
                     "types" => $this->types,
-                    "desc" => $this->desc,
+                    "description" => $this->description,
                     "images" => $this->images,
                     "video" => $this->video
                 );
@@ -135,16 +135,16 @@ class ModelBloc implements  Model {
                 return false;
             }
         } else {
-            $sql = "UPDATE `Bloc` SET `dif` = :dif, `creator` = :creator, `date` = :date, `types` = :types, `desc` = :desc, `images` = :images, `video` = :video WHERE `name` = :name";
+            $sql = "UPDATE `Bloc` SET `difficulty` = :difficulty, `creator` = :creator, `date` = :date, `types` = :types, `description` = :description, `images` = :images, `video` = :video WHERE `name` = :name";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sql);
                 $values = array(
                     "name" => $this->name,
-                    "dif" => $this->dif,
+                    "difficulty" => $this->difficulty,
                     "creator" => $this->creator,
                     "date" => $this->date,
                     "types" => $this->types,
-                    "desc" => $this->desc,
+                    "description" => $this->description,
                     "images" => $this->images,
                     "video" => $this->video
                 );
@@ -173,11 +173,11 @@ class ModelBloc implements  Model {
 
     public function update() {
         $blocRecovered = self::getByName($this->getName());
-        $this->setDif($blocRecovered->getDif());
+        $this->setDifficulty($blocRecovered->getDifficulty());
         $this->setCreator($blocRecovered->getCreator());
         $this->setDate($blocRecovered->getDate());
         $this->setTypes($blocRecovered->getTypes());
-        $this->setDesc($blocRecovered->getDesc());
+        $this->setDescription($blocRecovered->getDescription());
     }
 
     ################
@@ -188,8 +188,8 @@ class ModelBloc implements  Model {
         return $this->name;
     }
 
-    public function getDif() {
-        return $this->dif;
+    public function getDifficulty() {
+        return $this->difficulty;
     }
 
     public function getCreator() {
@@ -204,8 +204,8 @@ class ModelBloc implements  Model {
         return json_decode($this->types, true);
     }
 
-    public function getDesc() {
-        return $this->desc;
+    public function getDescription() {
+        return $this->description;
     }
 
     public function getImages() {
@@ -246,10 +246,10 @@ class ModelBloc implements  Model {
         }
     }
 
-    public function setDif($dif) {
-        if (!is_null($dif)) {
-            if (strlen($dif) <= 32) {
-                $this->dif = $dif;
+    public function setDifficulty($difficulty) {
+        if (!is_null($difficulty)) {
+            if (strlen($difficulty) <= 32) {
+                $this->difficulty = $difficulty;
             } else {
                 CustomError::callError("La difficulté ne doit pas dépasser les 3 caractères");
             }
@@ -278,10 +278,10 @@ class ModelBloc implements  Model {
         }
     }
 
-    public function setDesc($desc) {
-        if (!is_null($desc)) {
-            if (strlen($desc) <= 256) {
-                $this->desc = $desc;
+    public function setDescription($description) {
+        if (!is_null($description)) {
+            if (strlen($description) <= 256) {
+                $this->description = $description;
             } else {
                 CustomError::callError("La description ne doit pas dépasser les 256 caractères");
             }

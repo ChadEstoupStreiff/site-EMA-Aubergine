@@ -3,7 +3,7 @@ function user_actions(div, user) {
     d.className = "inline center";
 
     let a = document.createElement("a");
-    a.href = "?c=Admin&f=deleteUser&login=" + user[0];
+    a.href = "?c=Admin&f=deleteUser&login=" + user["login"];
     d.appendChild(a);
     let i = document.createElement("i");
     i.className = "fa-solid fa-trash"
@@ -11,7 +11,7 @@ function user_actions(div, user) {
 
 
     a = document.createElement("a");
-    a.href = "?c=Admin&f=regeneratepassword&login=" + user[0];
+    a.href = "?c=Admin&f=regeneratepassword&login=" + user["login"];
     d.appendChild(a);
     i = document.createElement("i");
     i.className = "fa-solid fa-unlock"
@@ -37,16 +37,9 @@ function user_actions(div, user) {
     s.addEventListener("change", (event) => {
         let value = event.target.value;
         if (value != "Types")
-            window.location.href = "?c=Admin&f=setUserType&login=" + user[0] + "&type=" + value;
+            window.location.href = "?c=Admin&f=setUserType&login=" + user["login"] + "&type=" + value;
     });
     d.appendChild(s);    
 
     div.appendChild(d);
-}
-
-
-let table = null;
-window.onload = function() {
-    table = new Tab("tab-users", [], user_actions);
-    table.update();
 }

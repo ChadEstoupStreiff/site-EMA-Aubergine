@@ -8,11 +8,11 @@ CREATE TABLE `User` (
 
 CREATE TABLE `Bloc` (
   `name` varchar(32) NOT NULL,
-  `dif` varchar(3) NOT NULL,
+  `difficulty` varchar(3) NOT NULL,
   `creator` varchar(32) NOT NULL,
   `date` DATE NOT NULL,
   `types` varchar(128) NOT NULL,
-  `desc` varchar(256),
+  `description` varchar(256),
   `images` varchar(256) NOT NULL,
   `video` varchar(64),
   CONSTRAINT PK_Bloc PRIMARY KEY (name),

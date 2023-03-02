@@ -34,7 +34,6 @@
         }
 
         public static function register() {
-            
             if (array_key_exists("login", $_POST) && array_key_exists("password", $_POST) && array_key_exists("password-verify", $_POST)) {
                 require_once "utils/ReCaptcha.php";
                 if (!Conf::isCaptchaEnable() || ReCaptchaUtils::checkValid()) {
@@ -93,11 +92,22 @@
                 UserUtils::askToConnect();
         }
 
+        public static function see()
+        {
+            if (array_key_exists("login", $_GET)) {
+                $var = UserUtils::getUser($_GET["login"]);
+                if ($var != False) 
+                    ViewManager::callUser('see', $var);
+                else
+                    CustomError::call("L'utilisateur n'existe pas");
+            } else
+                CustomError::call("Pécisez un login");
+        }
+
         public static function main()
         {
             if(UserUtils::isConnected()){
-                $var = $_SESSION["user_model"];
-                ViewManager::callUser('home', $var);
+                ViewManager::callUser('home', $_SESSION["user_model"]);
             } else
                 UserUtils::askToConnect();
         }

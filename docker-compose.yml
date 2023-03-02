@@ -60,24 +60,24 @@ services:
       - ema_aubergine
     hostname: ema_aubergine_database
 
-  # ema_aubergine_phpmyadmin:
-  #   env_file:
-  #     - .env
-  #   image: phpmyadmin/phpmyadmin
-  #   container_name: ema_aubergine_phpmyadmin
-  #   restart: always
-  #   depends_on:
-  #     - ema_aubergine_database
-  #   links:
-  #     - ema_aubergine_database
-  #   environment:
-  #     PMA_HOST: ema_aubergine_database
-  #     PMA_PORT: 3306
-  #     PMA_ARBITRARY: 1
-  #   networks:
-  #     - ema_aubergine
-  #   ports:
-  #     - ${PMA_PORT}:80
+  ema_aubergine_phpmyadmin:
+    env_file:
+      - .env
+    image: phpmyadmin/phpmyadmin
+    container_name: ema_aubergine_phpmyadmin
+    restart: always
+    depends_on:
+      - ema_aubergine_database
+    links:
+      - ema_aubergine_database
+    environment:
+      PMA_HOST: ema_aubergine_database
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    networks:
+      - ema_aubergine
+    ports:
+      - ${PMA_PORT}:80
 
 
 networks:

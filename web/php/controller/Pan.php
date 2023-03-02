@@ -39,7 +39,28 @@
             if (array_key_exists("name", $_GET)) {
                 require_once("model/ModelBloc.php");
                 $bloc = ModelBloc::getByName($_GET["name"]);
-                ViewManager::callPan("bloc", $bloc);
+                if ($bloc != False)
+                    ViewManager::callPan("bloc", $bloc);
+                else
+                    CustomError::call("Le bloc n'existe pas");
+            } else {
+                CustomError::call("Précisez un nom de bloc");
+            }
+        }
+
+        static public function delete() {
+            if (array_key_exists("name", $_GET)) {
+                require_once("model/ModelBloc.php");
+                $bloc = ModelBloc::getByName($_GET["name"]);
+                if ($bloc != False) {
+                    if (UserUtils::isAdmin() || UserUtils::getLogin() == $bloc->getCreator()) {
+                        $bloc->delete();
+                        ViewManager::callUser("home", $_SESSION["user_model"]);
+                    } else
+                        CustomError::call("Vous n'avez pas la permission de supprimer ce bloc");
+                }
+                else
+                    CustomError::call("Le bloc n'existe pas");
             } else {
                 CustomError::call("Précisez un nom de bloc");
             }

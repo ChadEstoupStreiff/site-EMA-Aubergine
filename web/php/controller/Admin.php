@@ -87,6 +87,13 @@
                 CustomError::callError("You can't access to this content");
         }
 
+        public static function blocs() {
+            if (UserUtils::askToConnectAndHasType("ADMIN")) {
+                ViewManager::callAdmin('blocs');
+            } else
+                CustomError::callError("You can't access to this content");
+        }
+
         public static function main()
         {
             if (UserUtils::askToConnectAndHasType("ADMIN")) {

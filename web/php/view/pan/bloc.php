@@ -1,5 +1,5 @@
 <h1><? echo $var->getName(); ?></h1>
-<h2><? echo $var->getDif(); ?></h2>
+<h2><? echo $var->getDifficulty(); ?></h2>
 <h3>Ouvert part <a href="?c=User&f=see&login=<? echo $var->getCreator() ?>"><? echo UserUtils::getUser($var->getCreator())->getNickname(); ?></a> le <? echo $var->getDate(); ?></h3>
 <hr>
 <h3><?
@@ -10,7 +10,7 @@
     echo substr($msg, 2);
 ?></h3>
 <?
-    $desc = $var->getDesc();
+    $desc = $var->getDescription();
     if ($desc != NULL)
         echo "<p>" . $desc . "</p>";
 ?>

@@ -1,35 +1,38 @@
 from fastapi import FastAPI
-from dotenv import dotenv_values
-from sql import RequestBuilder, get_cursor
+from sql import RequestBuilder
 
 
-config = dotenv_values(".env")
-cur = get_cursor(config)
 app = FastAPI()
 
 
-@app.get("/users")
+@app.get("/users", tags=["Users"])
 async def get_users(page: int = 0, pageSize: int = 10, regex: str = None):
-    request = RequestBuilder(cur, ["login", "nickname", "type"], "User")
+    request = RequestBuilder(["login", "nickname", "type"], "User")
     return request.execute()
 
 
-@app.get("/user/{login}")
+@app.get("/user/{login}", tags=["Users"])
 async def get_user(login: str):
-    request = RequestBuilder(cur, ["login", "nickname", "type"], "User")
+    request = RequestBuilder(["login", "nickname", "type"], "User")
     request.add_condition("login", "%s")
+    return request.execute_single(values=(login,))
+
+@app.get("/user/{login}/blocs", tags=["Users", "Blocs"])
+async def get_blocs_user(login: str):
+    request = RequestBuilder(["name", "difficulty", "creator", "date"], "Bloc")
+    request.add_condition("creator", "%s")
     return request.execute(values=(login,))
 
 
-@app.get("/blocs")
+@app.get("/blocs", tags=["Blocs"])
 async def get_blocs(page: int = 0, pageSize: int = 10, regex: str = None):
-    request = RequestBuilder(cur, ["name", "dif", "creator", "date"], "Bloc")
+    request = RequestBuilder(["name", "difficulty", "creator", "date"], "Bloc")
     return request.execute()
 
 
-@app.get("/bloc/{name}")
+@app.get("/bloc/{name}", tags=["Blocs"])
 async def get_bloc(name: str):
     # TODO add desc
-    request = RequestBuilder(cur, ["name", "dif", "creator", "date", "types", "images", "video"], "Bloc")
+    request = RequestBuilder(["name", "difficulty", "creator", "date", "types", "description", "images", "video"], "Bloc")
     request.add_condition("name", "%s")
-    return request.execute(values=(name,))
+    return request.execute_single(values=(name,))
