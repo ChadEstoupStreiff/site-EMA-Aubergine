@@ -5,7 +5,7 @@ async function getJSONAPI(url) {
     const response = await fetch(url,
         {
             credentials: "include",
-            "headers": {
+            headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": "true",
                 "Access-Control-Allow-Methods": "GET",
