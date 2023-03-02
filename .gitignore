@@ -14,3 +14,4 @@ Cargo.lock
 web/php/files
 ignore/*
 web/config
+*.pyc
