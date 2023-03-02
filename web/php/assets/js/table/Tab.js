@@ -2,7 +2,12 @@ async function getJSONAPI(url) {
     const request = new XMLHttpRequest();
 
     console.log(url);
-    const response = await fetch(url);
+    const response = await fetch(url,
+        {
+            "headers": {
+                "Access-Control-Allow-Origin": url
+            }
+        });
     return response.json();
 }
 
