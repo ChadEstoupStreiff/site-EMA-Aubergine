@@ -7,15 +7,17 @@
         <link rel="stylesheet" href="assets/css/style.css" type="text/css">
         <script src="https://kit.fontawesome.com/7ab6419628.js" crossorigin="anonymous"></script>
         
+        
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQ4064FXTN"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZPCPH2HVVB"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-KQ4064FXTN');
+        gtag('config', 'G-ZPCPH2HVVB');
         </script>
+
 
     </head>
     <body>
