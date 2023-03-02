@@ -12,7 +12,23 @@ EMA Aubergines community website is the website for referencing all usefull ress
 
 
 ## To install and launch
-create .env file based on .env_ex file
+```> Clone this git```
+
+create .env file based on .env_ex file  
+```bash
+cp .env_ex .env
+```  
+
 create config folder for web based on config_ex folder
-launch docker wit cmd
-```sudo docker-compose up -d```
+```bash
+cp web/config_ex web/config -R
+```  
+Make sure permissions are corrects
+```bash
+sudo chown www-data:root . -R
+sudo chmod 775 . -R
+```
+launch docker wit command  
+```bash
+sudo docker-compose up -d
+```
