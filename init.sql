@@ -12,7 +12,7 @@ CREATE TABLE `Bloc` (
   `creator` varchar(32) NOT NULL,
   `date` DATE NOT NULL,
   `types` varchar(128) NOT NULL,
-  `description` varchar(256),
+  `description` varchar(1024),
   `images` varchar(256) NOT NULL,
   `video` varchar(64),
   CONSTRAINT PK_Bloc PRIMARY KEY (name),

@@ -248,7 +248,7 @@ class ModelBloc implements  Model {
 
     public function setDifficulty($difficulty) {
         if (!is_null($difficulty)) {
-            if (strlen($difficulty) <= 32) {
+            if (strlen($difficulty) <= 3) {
                 $this->difficulty = $difficulty;
             } else {
                 CustomError::callError("La difficulté ne doit pas dépasser les 3 caractères");
@@ -280,10 +280,10 @@ class ModelBloc implements  Model {
 
     public function setDescription($description) {
         if (!is_null($description)) {
-            if (strlen($description) <= 256) {
+            if (strlen($description) <= 1024) {
                 $this->description = $description;
             } else {
-                CustomError::callError("La description ne doit pas dépasser les 256 caractères");
+                CustomError::callError("La description ne doit pas dépasser les 1024 caractères");
             }
         }
     }
