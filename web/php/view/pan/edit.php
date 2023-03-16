@@ -1,13 +1,16 @@
-<h2 class="lettopclear">Ouvrir un bloc</h2>
+<h2 class="lettopclear">Modifier le bloc <? echo $var->getName() ?></h2>
 <hr/>
 <form method="post" action="./?c=Pan&f=create" class="center" enctype="multipart/form-data">
     <div class="inline center responsive">
-        <input type="text" placeholder="Entrez le nom du bloc" name="name" required>
+        <input type="text" placeholder="Entrez le nom du bloc" name="name" value="<? echo $var->getName() ?>" required>
         <select name="dif" required>
             <option value="">Difficulté</option>
             <?
                 foreach (ModelBloc::getListDifficulties() as $diff) {
-                    echo "<option value='" . $diff . "'>" . $diff . "</option>";
+                    $selected = "";
+                    if ($diff == $var->getDifficulty())
+                        $selected = " selected ";
+                    echo "<option value='" . $diff . "'" . $selected . ">" . $diff . "</option>";
                 }
             ?>
         </select>
@@ -15,7 +18,10 @@
             <select multiple name="types[]">
                 <?
                     foreach (ModelBloc::getListTypes() as $types) {
-                        echo "<option valie='" . $types . "'>" . $types . "</option>";
+                        $selected = "";
+                        if (in_array($types, $var->getTypes()))
+                            $selected = " selected ";
+                        echo "<option valie='" . $types . "'" . $selected . ">" . $types . "</option>";
                     }
                 ?>
             </select>
@@ -28,17 +34,17 @@
 
     <div class="center">
         <div class="center">
-            <h3>Images</h3>
-            <input type="file" name="images[]" accept=".png, .jpeg, .jpg, .gif" multiple required>
+            <h3>Ecraser les images</h3>
+            <input type="file" name="images[]" accept=".png, .jpeg, .jpg, .gif" multiple>
         </div>
         <div class="center">
-            <h3>Video</h3>
+            <h3>Ecraser la video</h3>
             <input type="file" name="video" accept=".mp4, .avi, .mkv">
         </div>
     </div>
     
 
-    <textarea name="desc" placeholder="Ecrire la description du bloc"></textarea>
+    <textarea name="desc" placeholder="Ecrire la description du bloc"><? echo $var->getDescription() ?></textarea>
 
     <button type="submit" class="submit-btn">Créer</button>
 </form>

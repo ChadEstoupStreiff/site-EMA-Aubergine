@@ -5,9 +5,9 @@
         }
 
         static public function create() {
+            require_once("model/ModelBloc.php");
             if (UserUtils::askToConnectAndHasType("OUVREUR")) {
                 if (array_key_exists("name", $_POST) && array_key_exists("dif", $_POST) && array_key_exists("images", $_FILES) && count($_FILES["images"]["name"]) > 0&& strlen($_FILES["images"]["name"][0]) > 0) {
-                    require_once("model/ModelBloc.php");
                     if (ModelBloc::getByName($_POST["name"]) == false) {
                         if (array_key_exists("types", $_POST))
                             $types = $_POST["types"];
@@ -29,23 +29,41 @@
                         header("location: ?c=Pan&f=see&name=" . $bloc->getName());
                     } else
                         CustomError::call("Un bloc du même nom existe déjà");
-                } else
+                } else {
                     ViewManager::callPan("create");
+                }
             } else
                 CustomError::call("Tu dois être ouvreur pour pourvoir acceder à cette page, contact un administrateur pour obtenir le rôle");
         }
 
-        static public function see() {
+        static public function edit() {
             if (array_key_exists("name", $_GET)) {
                 require_once("model/ModelBloc.php");
                 $bloc = ModelBloc::getByName($_GET["name"]);
                 if ($bloc != False)
-                    ViewManager::callPan("bloc", $bloc);
+                    if (UserUtils::isAdmin() || $bloc->getCreator())
+                        ViewManager::callPan("edit", $bloc);
+                    else
+                        CustomError::call("Vous ne pouvez pas éditer ce bloc");
                 else
                     CustomError::call("Le bloc n'existe pas");
-            } else {
+            } else
                 CustomError::call("Précisez un nom de bloc");
-            }
+        } 
+
+        static public function see() {
+            if (UserUtils::isConnected())
+                if (array_key_exists("name", $_GET)) {
+                    require_once("model/ModelBloc.php");
+                    $bloc = ModelBloc::getByName($_GET["name"]);
+                    if ($bloc != False)
+                        ViewManager::callPan("bloc", $bloc);
+                    else
+                        CustomError::call("Le bloc n'existe pas");
+                } else
+                    CustomError::call("Précisez un nom de bloc");
+            else
+                UserUtils::askToConnect()  ;              
         }
 
         static public function delete() {

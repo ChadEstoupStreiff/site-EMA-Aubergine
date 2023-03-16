@@ -10,6 +10,13 @@ function user_bloc(div, bloc) {
     a.appendChild(i); 
 
     a = document.createElement("a");
+    a.href = "?c=Pan&f=edit&name=" + bloc["name"];
+    d.appendChild(a);
+    i = document.createElement("i");
+    i.className = "fa-solid fa-pen"
+    a.appendChild(i); 
+
+    a = document.createElement("a");
     a.href = "?c=Pan&f=delete&name=" + bloc["name"];
     d.appendChild(a);
     i = document.createElement("i");

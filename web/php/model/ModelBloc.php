@@ -26,6 +26,14 @@ class ModelBloc implements  Model {
     ##   STATIC   ##
     ################
 
+    public static function getListDifficulties() {
+        return ["4&-", "5", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8&+"];
+    }
+
+    public static function getListTypes() {
+        return ["Force", "Technique", "Reglettes", "Morphologie", "Jetté", "Dalle", "Devert", "Surplomb", "Prou", "Japoneserie", "Grégoire (mutant)", "Dièdre", "Run & Jump & Skate"];
+    }
+
     public static function getByName($name) {
         return self::getByAttribute('name', $name);
     }
