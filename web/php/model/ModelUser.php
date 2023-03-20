@@ -338,10 +338,10 @@ class ModelUser implements  Model {
 
     public function setDescription($description) {
         if (!is_null($description)) {
-            if (strlen($description) <= 128) {
+            if (strlen($description) <= 512) {
                 $this->description = $description;
             } else {
-                CustomError::callError("La description ne doit pas dépasser les 128 caractères");
+                CustomError::callError("La description ne doit pas dépasser les 512 caractères");
             }
         }
     }

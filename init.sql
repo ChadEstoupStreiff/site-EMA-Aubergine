@@ -6,7 +6,7 @@ CREATE TABLE `User` (
   `email` varchar(60) NULL,
   `phone` varchar(20) NULL,
   `class` varchar(10) NOT NULL,
-  `description` varchar(128) NULL,
+  `description` varchar(512) NULL,
   `nivbloc` varchar(3) NULL,
   `nivdif` varchar(3) NULL,
   `show` tinyint(1) NOT NULL,
