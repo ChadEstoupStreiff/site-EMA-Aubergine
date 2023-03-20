@@ -41,7 +41,7 @@ class RequestBuilder():
     def _generate_query(self):
         query = "SELECT "
         for key in self.keys:
-            query += f"{key}, "
+            query += f"`{key}`, "
         query = f"{query[:-2]} FROM {self.table}" 
         if len(self.conditions) > 0 or self.regex is not None:
             query += " WHERE "

@@ -38,16 +38,23 @@
                 require_once "utils/ReCaptcha.php";
                 if (!Conf::isCaptchaEnable() || ReCaptchaUtils::checkValid()) {
                     if (UserUtils::getUser($_POST["login"]) == false) {
-                        $nickname = "";
-                        if (array_key_exists("nickname", $_POST))
-                            $nickname = $_POST["nickname"];
-                        else
-                            $nickname = $_POST["login"];
                         if (strcmp($_POST['password'], $_POST['password-verify']) == 0) {
-                            $user = new ModelUser("GUEST", $_POST["login"], $nickname, password_hash($_POST["password"],PASSWORD_BCRYPT ));
+                            $user = new ModelUser(
+                                "GUEST",
+                                $_POST["login"],
+                                $_POST["login"],
+                                password_hash($_POST["password"],PASSWORD_BCRYPT),
+                                "?",
+                                "?",
+                                $_POST["class"],
+                                "?",
+                                "?",
+                                "?",
+                                0
+                            );
                             $user->save();
-                            User::disconnect();
-                            header('location: ./?c=User');
+                            $_SESSION["user_model"] = $user;
+                            header('location: ./?c=User&f=informations');
                         } else
                             CustomError::callError("Les mots de passe ne sont pas égaux");
                     } else
@@ -81,7 +88,19 @@
             if(UserUtils::isConnected()){
                 if (array_key_exists("nickname", $_POST)) {
                     $user = UserUtils::getUser();
+
                     $user->setNickName($_POST["nickname"]);
+                    $user->setClass($_POST["class"]);
+                    $user->setNivDif($_POST["nivdif"]);
+                    $user->setNivBloc($_POST["nivbloc"]);
+                    $user->setEmail($_POST["email"]);
+                    $user->setPhone($_POST["phone"]);
+                    $user->setDescription($_POST["desc"]);
+                    if ($_POST["show"] == "on")
+                        $user->setShow(1);
+                    else
+                        $user->setShow(0);
+                
                     $user->save();
                     header("location: ./?c=User");
                 } else {

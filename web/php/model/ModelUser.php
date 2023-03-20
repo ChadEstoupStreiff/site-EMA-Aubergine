@@ -2,16 +2,45 @@
 require_once('./model/Model.php');
 class ModelUser implements  Model {
 
+    static public function getListClass() {
+        return ["Externe", "Ancien", "FIG", "INFRES13", "INFRES14", "INFRES15"];
+    }
+
     private $type;
     private $login;
     private $nickname;
     private $password;
+    private $email;
+    private $phone;
+    private $class;
+    private $description;
+    private $nivbloc;
+    private $nivdif;
+    private $show;
 
-    public function __construct($ty = NULL, $login = NULL, $nickname = NULL, $pwd = NULL) {
+    public function __construct(
+            $ty = NULL,
+            $login = NULL,
+            $nickname = NULL,
+            $pwd = NULL,
+            $email = NULL,
+            $phone = NULL,
+            $class = NULL,
+            $description = NULL, 
+            $nivbloc = NULL, 
+            $nivdif = NULL, 
+            $show = NULL) {
         $this->setType($ty);
         $this->setNickName($nickname);
         $this->setLogin($login);
         $this->setPassword($pwd);
+        $this->setEmail($email);
+        $this->setPhone($phone);
+        $this->setClass($class);
+        $this->setDescription($description);
+        $this->setNivBloc($nivbloc);
+        $this->setNivDif($nivdif);
+        $this->setShow($show);
     }
 
     ################
@@ -107,14 +136,21 @@ class ModelUser implements  Model {
 
     public function save() {
         if (self::getByLogin($this->getLogin()) == false) {
-            $sqlI = "INSERT INTO User (type, login, nickname, password) VALUES (:ty, :log, :nic, :pwd)";
+            $sqlI = "INSERT INTO User (`type`, `login`, `nickname`, `password`, `email`, `phone`, `class`, `description`, `nivbloc`, `nivdif`, `show`) VALUES (:ty, :log, :nic, :pwd, :mail, :phone, :class, :de, :nbloc, :ndif, :sh)";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sqlI);
                 $values = array(
-                    "ty" => $this->type,
-                    "log" => $this->login,
-                    "nic" => $this->nickname,
-                    "pwd" => $this->password
+                    "ty" => $this->gettype(),
+                    "log" => $this->getLogin(),
+                    "nic" => $this->getNickName(),
+                    "pwd" => $this->getPassword(),
+                    "mail" => $this->getEmail(),
+                    "phone" => $this->getPhone(),
+                    "class" => $this->getClass(),
+                    "de" => $this->getDescription(),
+                    "nbloc" => $this->getNivBloc(),
+                    "ndif" => $this->getNivDif(),
+                    "sh" => $this->show,
                 );
                 $req_prep->execute($values);
                 return true;
@@ -123,14 +159,21 @@ class ModelUser implements  Model {
                 return false;
             }
         } else {
-            $sql = "UPDATE User SET type = :ty, nickname = :nic, password = :pwd WHERE login = :log";
+            $sql = "UPDATE User SET `type` = :ty, `nickname` = :nic, `password` = :pwd, `email` = :mail, `phone` = :phone, `class` = :class, `description` = :de, `nivbloc` = :nbloc, `nivdif` = :ndif, `show` = :sh WHERE `login` = :log";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sql);
                 $values = array(
-                    "ty" => $this->type,
-                    "log" => $this->login,
-                    "nic" => $this->nickname,
-                    "pwd" => $this->password
+                    "ty" => $this->gettype(),
+                    "log" => $this->getLogin(),
+                    "nic" => $this->getNickName(),
+                    "pwd" => $this->getPassword(),
+                    "mail" => $this->getEmail(),
+                    "phone" => $this->getPhone(),
+                    "class" => $this->getClass(),
+                    "de" => $this->getDescription(),
+                    "nbloc" => $this->getNivBloc(),
+                    "ndif" => $this->getNivDif(),
+                    "sh" => $this->show,
                 );
                 $req_prep->execute($values);
                 return true;
@@ -142,7 +185,7 @@ class ModelUser implements  Model {
     }
 
     public function delete(){
-        $sql = "DELETE FROM User WHERE login = :login";
+        $sql = "DELETE FROM User WHERE `login` = :login";
         try {
             $req_prep = DBCom::getPDO()->prepare($sql);
             $values = array("login" => $this->login);
@@ -161,6 +204,13 @@ class ModelUser implements  Model {
         $this->setLogin($UserRecovered->getLogin());
         $this->setNickName($UserRecovered->getNickName());
         $this->setPassword($UserRecovered->getPassword());
+        $this->setEmail($UserRecovered->getEmail());
+        $this->setPhone($UserRecovered->getPhone());
+        $this->setClass($UserRecovered->getClass());
+        $this->setDescription($UserRecovered->getDescription());
+        $this->setNivBloc($UserRecovered->getNivBloc());
+        $this->setNivDif($UserRecovered->getNivDif());
+        $this->setShow($UserRecovered->isShowing());
     }
 
     ################
@@ -181,6 +231,34 @@ class ModelUser implements  Model {
 
     public function getPassword() {
         return $this->password;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function getPhone() {
+        return $this->phone;
+    }
+
+    public function getClass() {
+        return $this->class;
+    }
+
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function getNivBloc() {
+        return $this->nivbloc;
+    }
+
+    public function getNivDif() {
+        return $this->nivdif;
+    }
+
+    public function isShowing() {
+        return $this->show == 1;
     }
 
 
@@ -223,8 +301,74 @@ class ModelUser implements  Model {
             if (strlen($pwd) <= 60) {
                 $this->password = $pwd;
             } else {
-                CustomError::callError("Le mot de passe  ne doit pas dépasser les 60 caractères");
+                CustomError::callError("Le mot de passe ne doit pas dépasser les 60 caractères");
             }
+        }
+    }
+
+    public function setEmail($email) {
+        if (!is_null($email)) {
+            if (strlen($email) <= 60) {
+                $this->email = $email;
+            } else {
+                CustomError::callError("L'email ne doit pas dépasser les 60 caractères");
+            }
+        }
+    }
+
+    public function setPhone($phone) {
+        if (!is_null($phone)) {
+            if (strlen($phone) <= 20) {
+                $this->phone = $phone;
+            } else {
+                CustomError::callError("Le téléphone ne doit pas dépasser les 20 caractères");
+            }
+        }
+    }
+
+    public function setClass($class) {
+        if (!is_null($class)) {
+            if (strlen($class) <= 10) {
+                $this->class = $class;
+            } else {
+                CustomError::callError("La classe ne doit pas dépasser les 10 caractères");
+            }
+        }
+    }
+
+    public function setDescription($description) {
+        if (!is_null($description)) {
+            if (strlen($description) <= 128) {
+                $this->description = $description;
+            } else {
+                CustomError::callError("La description ne doit pas dépasser les 128 caractères");
+            }
+        }
+    }
+
+    public function setNivBloc($nivbloc) {
+        if (!is_null($nivbloc)) {
+            if (strlen($nivbloc) <= 3) {
+                $this->nivbloc = $nivbloc;
+            } else {
+                CustomError::callError("Le niveau difficulté ne doit pas dépasser les 3 caractères");
+            }
+        }
+    }
+
+    public function setNivDif($nivdif) {
+        if (!is_null($nivdif)) {
+            if (strlen($nivdif) <= 3) {
+                $this->nivdif = $nivdif;
+            } else {
+                CustomError::callError("Le niveau bloc ne doit pas dépasser les 3 caractères");
+            }
+        }
+    }
+
+    public function setShow($show) {
+        if (!is_null($show) && ($show == 0 || $show == 1)) {
+            $this->show = $show;
         }
     }
 }

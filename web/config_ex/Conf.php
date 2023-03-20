@@ -1,6 +1,7 @@
 <?php
 
     class Conf {
+        static private $ver = "v1.0";
         static private $phplog = False;
         static private $enable_captcha = True;
         static private $secret_re_captcha_public = "XXX-XXX";
@@ -30,5 +31,9 @@
 
         static public function getAPI() {
             return self::$api;
+        }
+
+        static public function getVersion() {
+            return self::$ver;
         }
     }

@@ -25,9 +25,13 @@ async def get_users(page: int = 0, page_size: int = 10, regex: str = None):
 
 @app.get("/user/{login}", tags=["Users"])
 async def get_user(login: str):
-    request = RequestBuilder(["login", "nickname", "type"], "User")
+    request = RequestBuilder(["login", "nickname", "type", "email", "phone", "class", "description", "nivbloc", "nivdif", "show"], "User")
     request.add_condition("login", "%s")
-    return request.execute_single(values=(login,))
+    user = request.execute_single(values=(login,))
+    if user["show"] == 0:
+        user["email"] = "XXX"
+        user["phone"] = "XXX"
+    return user
 
 @app.get("/user/{login}/blocs", tags=["Users", "Blocs"])
 async def get_blocs_user(login: str, page: int = 0, page_size: int = 10, regex: str = None):
@@ -48,6 +52,6 @@ async def get_blocs(page: int = 0, page_size: int = 10, regex: str = None):
 
 @app.get("/bloc/{name}", tags=["Blocs"])
 async def get_bloc(name: str):
-    request = RequestBuilder(["name", "difficulty", "creator", "date", "types", "description", "images", "video"], "Bloc")
+    request = RequestBuilder(["name", "difficulty", "creator", "date", "types", "zones", "description", "images"], "Bloc")
     request.add_condition("name", "%s")
     return request.execute_single(values=(name,))

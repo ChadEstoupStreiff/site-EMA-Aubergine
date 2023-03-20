@@ -32,11 +32,11 @@
                             <p>Admin</p>
                         </a>"
                 ?>
-                <a href="https://www.facebook.com/groups/1700851880151381" class="headerhidden inline center">
+                <a href="https://www.facebook.com/groups/1700851880151381" class="headerhidden inline center" target="_blank">
                     <i class="fab fa-facebook"></i></i>
                     <p>Facebook</p>
                 </a>
-                <a href="https://www.facebook.com/messages/t/2207624789268700" class="headerhidden inline center">
+                <a href="https://www.facebook.com/messages/t/2207624789268700" class="headerhidden inline center" target="_blank">
                     <i class="fab fa-facebook-messenger"></i>
                     <p>Messenger</p>
                 </a>
@@ -44,10 +44,10 @@
                     <i class="fas fa-dumbbell"></i>
                     <p>Blocs Pan</p>
                 </a>
-                <a href="?c=Meme" class="headerhidden inline center">
+                <!-- <a href="?c=Meme" class="headerhidden inline center">
                     <i class="fa-regular fa-image"></i>
                     <p>Best Même</p>
-                </a>
+                </a> -->
             </div>
             <a href="?c=User">
                 <i class="fas fa-user"></i>

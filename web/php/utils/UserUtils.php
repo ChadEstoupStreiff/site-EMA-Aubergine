@@ -4,12 +4,14 @@
             return array_key_exists('user_model', $_SESSION);
         }
 
-        public static function hasType($type) {
-            return self::isConnected() && ($_SESSION["user_model"]->gettype() === $type || $_SESSION["user_model"]->gettype() === "ADMIN");
+        public static function hasType($type, $user = NULL) {
+            if ($user == NULL)
+                $user = UserUtils::getUser();
+            return self::isConnected() && ($user->gettype() === $type || $user->gettype() === "ADMIN");
         }
 
         public static function isAdmin() {
-            return self::isConnected() && $_SESSION["user_model"]->gettype() === "ADMIN";
+            return self::isConnected() && UserUtils::getUser()->gettype() === "ADMIN";
         }
 
 

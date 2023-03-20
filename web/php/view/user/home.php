@@ -6,10 +6,12 @@
 <h3>Type: <?php echo $var->getType()?></h3>
 <div class="inline">
     <a class="button" href="./?c=User&f=informations">Changer ses informations</a>
-    <a class="button" href="./?c=User&f=password">Changer de mot de passe</a>
+    <a class="button" href="./?c=User&f=see&login=<? echo UserUtils::getLogin() ?>">Voir mon profil</a>
 </div>
-<a class="button red" href="./?c=User&f=disconnect">Se déconnecter</a>
-
+<div class="inline">
+    <a class="button" href="./?c=User&f=password">Changer de mot de passe</a>
+    <a class="button red" href="./?c=User&f=disconnect">Se déconnecter</a>
+</div>
 <?
 if (UserUtils::hasType("OUVREUR")) {
     echo "

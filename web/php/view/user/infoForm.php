@@ -1,7 +1,59 @@
 <h2>Changer mes informations</h2>
 <hr/>
 <form action="./?c=User&f=informations" method="post" class="center">
-        <label><h3>Nouveau pseudo</h3></label>
-        <input type="text" name="nickname" value="<?echo $var->getNickName()?>">
+        <div class="inline responsive">
+                <div>
+                        <label><h3>Pseudo</h3></label>
+                        <input type="text" name="nickname" value="<?echo $var->getNickName()?>">
+                </div>
+                <div>
+                        <label><h3>Classe</h3></label>
+                        <select name="class" required>
+                                <?
+                                        require_once('model/ModelUser.php');
+                                        foreach (ModelUser::getListClass() as $class) {
+                                                echo "<option value='" . $class . "'>" . $class . "</option>";
+                                        }
+                                ?>
+                        </select>
+                </div>
+        </div>
+        
+        <div class="inline responsive">
+                <div>
+                        <label><h3>Niveau difficulté</h3></label>
+                        <input type="text" name="nivdif" value="<?echo $var->getNivDif()?>">
+                </div>
+                <div>
+                        <label><h3>Niveau bloc</h3></label>
+                        <input type="text" name="nivbloc" value="<?echo $var->getNivBloc()?>">
+                </div>
+        </div>
+
+        <div class="inline responsive">
+                <div>
+                        <label><h3>E-Mail</h3></label>
+                        <input type="mail" name="email" value="<?echo $var->getEmail()?>">
+                </div>
+                <div>
+                        <label><h3>Téléphone</h3></label>
+                        <input type="tel" name="phone" value="<?echo $var->getPhone()?>">
+                </div>
+        </div>
+        <div class="inline center">
+                <label class="toggler-wrapper style-8">
+                        <input type="checkbox" name="show" <? if ($var->isShowing()) echo "checked"?>>
+                        <div class="toggler-slider">
+                                <div class="toggler-knob"></div>
+                        </div>
+                </label>
+                <label><h3>Montrer mes informations de contact</h3></label>
+        </div>
+
+        <hr/>
+        <label><h3>Description</h3></label>
+        <textarea name="desc"><?echo $var->getDescription()?></textarea>
+
+
         <input type="submit" class="button" value="Mettre à jour">
 </form>
