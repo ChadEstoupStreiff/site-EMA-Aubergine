@@ -9,15 +9,17 @@
     }
     echo substr($msg, 2);
 ?></h3>
+<h3><?
+    $msg = "";
+    foreach ($var->getZones() as $zones) {
+        $msg = $msg . ", " . $zones;
+    }
+    echo substr($msg, 2);
+?></h3>
 <?
     $desc = $var->getDescription();
     if ($desc != NULL)
         echo "<p>" . $desc . "</p>";
-?>
-<?
-    $video = $var->getVideoPath();
-    if ($video != NULL)
-        echo '<video controls><source src="' . $video . '" type="video/mp4"> Sorry, your browser doesn t support embedded videos.</video>';
 ?>
 <div class="inline center responsive">
     <?

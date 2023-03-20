@@ -13,18 +13,17 @@
                             $types = $_POST["types"];
                         else
                             $types = [];
+                        if (array_key_exists("zones", $_POST))
+                            $zones = $_POST["zones"];
+                        else
+                            $zones = [];
                         if (array_key_exists("desc", $_POST) && strlen($_POST["desc"]) > 0)
                             $desc = $_POST["desc"];
                         else
                             $desc = NULL;
-                        if (array_key_exists("video", $_FILES) && strlen($_FILES["video"]["name"]) > 0)
-                            $video = $_FILES["video"];
-                        else
-                            $video = NULL;
                         
-                        $bloc = new ModelBloc($_POST["name"], $_POST["dif"], UserUtils::getLogin(), date("Y-m-d"), $types, $desc);
+                        $bloc = new ModelBloc($_POST["name"], $_POST["dif"], UserUtils::getLogin(), date("Y-m-d"), $types, $zones, $desc);
                         $bloc->updateImages($_FILES["images"]);
-                        $bloc->updateVideo($_FILES["video"]);
                         $bloc->save();
                         header("location: ?c=Pan&f=see&name=" . $bloc->getName());
                     } else

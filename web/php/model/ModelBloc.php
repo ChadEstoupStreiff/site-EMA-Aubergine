@@ -2,21 +2,34 @@
 require_once('./model/Model.php');
 class ModelBloc implements  Model {
 
+    public static function getListDifficulties() {
+        return ["4&-", "5", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8&+"];
+    }
+
+    public static function getListTypes() {
+        return ["Force", "Technique", "Reglettes", "Morphologie", "Jetté", "Dalle", "Devert", "Surplomb", "Prou", "Japoneserie", "Grégoire (mutant)", "Dièdre", "Run & Jump & Skate"];
+    }
+
+    public static function getListZones() {
+        return ["porte", "dever gauche"];
+    }
+
     private $name;
     private $difficulty;
     private $creator;
     private $date;
     private $types;
+    private $zones;
     private $description;
     private $images;
-    private $video;
 
-    public function __construct($name = NULL, $difficulty = NULL, $creator = NULL, $date = NULL, $types = NULL, $description = NULL) {
+    public function __construct($name = NULL, $difficulty = NULL, $creator = NULL, $date = NULL, $types = NULL, $zones = NULL, $description = NULL) {
         $this->setName($name);
         $this->setDifficulty($difficulty);
         $this->setCreator($creator);
         $this->setDate($date);
         $this->setTypes($types);
+        $this->setZones($zones);
         $this->setDescription($description);
         if ($this->images == NULL)
             $this->images = "[]";
@@ -25,14 +38,6 @@ class ModelBloc implements  Model {
     ################
     ##   STATIC   ##
     ################
-
-    public static function getListDifficulties() {
-        return ["4&-", "5", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8&+"];
-    }
-
-    public static function getListTypes() {
-        return ["Force", "Technique", "Reglettes", "Morphologie", "Jetté", "Dalle", "Devert", "Surplomb", "Prou", "Japoneserie", "Grégoire (mutant)", "Dièdre", "Run & Jump & Skate"];
-    }
 
     public static function getByName($name) {
         return self::getByAttribute('name', $name);
@@ -123,7 +128,7 @@ class ModelBloc implements  Model {
 
     public function save() {
         if (self::getByName($this->getName()) == false) {
-            $sqlI = "INSERT INTO `Bloc`(`name`, `difficulty`, `creator`, `date`, `types`, `description`, `images`, `video`) VALUES (:name, :difficulty, :creator, :date, :types, :description, :images, :video)";
+            $sqlI = "INSERT INTO `Bloc`(`name`, `difficulty`, `creator`, `date`, `types`, `zones`, `description`, `images`) VALUES (:name, :difficulty, :creator, :date, :types, :zones, :description, :images)";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sqlI);
                 $values = array(
@@ -132,9 +137,9 @@ class ModelBloc implements  Model {
                     "creator" => $this->creator,
                     "date" => $this->date,
                     "types" => $this->types,
+                    "zones" => $this->zones,
                     "description" => $this->description,
                     "images" => $this->images,
-                    "video" => $this->video
                 );
                 $req_prep->execute($values);
                 return true;
@@ -143,7 +148,7 @@ class ModelBloc implements  Model {
                 return false;
             }
         } else {
-            $sql = "UPDATE `Bloc` SET `difficulty` = :difficulty, `creator` = :creator, `date` = :date, `types` = :types, `description` = :description, `images` = :images, `video` = :video WHERE `name` = :name";
+            $sql = "UPDATE `Bloc` SET `difficulty` = :difficulty, `creator` = :creator, `date` = :date, `types` = :types, `zones` = :zones, `description` = :description, `images` = :images WHERE `name` = :name";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sql);
                 $values = array(
@@ -152,9 +157,9 @@ class ModelBloc implements  Model {
                     "creator" => $this->creator,
                     "date" => $this->date,
                     "types" => $this->types,
+                    "zones" => $this->zones,
                     "description" => $this->description,
                     "images" => $this->images,
-                    "video" => $this->video
                 );
                 $req_prep->execute($values);
                 return true;
@@ -212,6 +217,10 @@ class ModelBloc implements  Model {
         return json_decode($this->types, true);
     }
 
+    public function getZones() {
+        return json_decode($this->zones, true);
+    }
+
     public function getDescription() {
         return $this->description;
     }
@@ -220,22 +229,12 @@ class ModelBloc implements  Model {
         return json_decode($this->images, true);
     }
 
-    public function getVideo() {
-        return $this->video;
-    }
-
     public function getImagesPath() {
         $images = [];
         foreach (json_decode($this->images) as $f) {
             $images[] = "files/blocs/" . $this->name . "/images/" . $f;
         } 
         return $images;
-    }
-
-    public function getVideoPath() {
-        if ($this->video == NULL)
-            return NULL;
-        return "files/blocs/" . $this->name . "/" . $this->video;
     }
 
 
@@ -286,6 +285,13 @@ class ModelBloc implements  Model {
         }
     }
 
+    public function setZones($zones) {
+        if (!is_null($zones)) {
+            $this->zones = json_encode($zones);
+        }
+    }
+
+
     public function setDescription($description) {
         if (!is_null($description)) {
             if (strlen($description) <= 1024) {
@@ -324,27 +330,6 @@ class ModelBloc implements  Model {
             }
     
             $this->images = json_encode($new_images);
-        }
-    }
-
-    public function updateVideo($video) {
-        $folder = "files/blocs/" . $this->name . "/";
-        if (!file_exists($folder)) {
-            mkdir($folder, 0777, true);
-        } else if ($this->video != NULL) {
-            unlink($folder . $this->video);
-        }
-
-        if ($video != NULL) {
-            $tmpFilePath = $video['tmp_name'];
-            if ($tmpFilePath != "") {
-                $fileExt = explode('.', $video['name']);
-                $newName = uniqid('', true) . '.' . strtolower(end($fileExt));
-
-                if (move_uploaded_file($tmpFilePath, $folder . $newName)) {
-                    $this->video = $newName;
-                }
-            }
         }
     }
 }

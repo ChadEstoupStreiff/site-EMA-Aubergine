@@ -18,7 +18,7 @@ CREATE TABLE `Bloc` (
   `difficulty` varchar(3) NOT NULL,
   `creator` varchar(32) NOT NULL,
   `date` DATE NOT NULL,
-  `types` varchar(128) NOT NULL,
+  `types` varchar(256) NOT NULL,
   `zones` varchar(128) NOT NULL,
   `description` varchar(1024),
   `images` varchar(256) NOT NULL,
