@@ -22,8 +22,8 @@
             <h3>Types</h3>
             <select multiple name="types[]">
                 <?
-                    foreach (ModelBloc::getListTypes() as $types) {
-                        echo "<option valie='" . $types . "'>" . $types . "</option>";
+                    foreach (ModelBloc::getListTypes() as $type) {
+                        echo "<option valie='" . $type . "'>" . $type . "</option>";
                     }
                 ?>
             </select>
@@ -32,8 +32,8 @@
             <h3>Zones</h3>
             <select multiple name="zones[]">
                 <?
-                    foreach (ModelBloc::getListZones() as $zones) {
-                        echo "<option valie='" . $zones . "'>" . $zones . "</option>";
+                    foreach (ModelBloc::getListZones() as $zone) {
+                        echo "<option valie='" . $zone . "'>" . $zone . "</option>";
                     }
                 ?>
             </select>

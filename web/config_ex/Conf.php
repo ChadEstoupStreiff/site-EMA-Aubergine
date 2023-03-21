@@ -9,6 +9,11 @@
         static private $domain = "chades.fr";
         static private $api = "ema-aubergine.chades.fr/api";
 
+
+        static public function getVersion() {
+            return self::$ver;
+        }
+
         static public function isPhpLogEnable() {
             return self::$enable_captcha;
         }
@@ -31,9 +36,5 @@
 
         static public function getAPI() {
             return self::$api;
-        }
-
-        static public function getVersion() {
-            return self::$ver;
         }
     }

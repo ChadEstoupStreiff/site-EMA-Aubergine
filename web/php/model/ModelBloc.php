@@ -184,6 +184,14 @@ class ModelBloc implements  Model {
         }
     }
 
+    public function deleteFiles(){
+        foreach ($this->getImages() as $img) {
+            unlink("files/blocs/" . $this->name . "/images/" . $img);
+        }
+        rmdir("files/blocs/" . $this->name . "/images");
+        rmdir("files/blocs/" . $this->name);
+    }
+
     public function update() {
         $blocRecovered = self::getByName($this->getName());
         $this->setDifficulty($blocRecovered->getDifficulty());

@@ -41,6 +41,20 @@
                 $bloc = ModelBloc::getByName($_GET["name"]);
                 if ($bloc != False)
                     if (UserUtils::isAdmin() || $bloc->getCreator())
+                    if (array_key_exists("name", $_POST) && array_key_exists("dif", $_POST) && array_key_exists("types", $_POST) && array_key_exists("zones", $_POST) && array_key_exists("desc", $_POST)) {
+                        $bloc->setDifficulty($_POST["dif"]);
+                        $bloc->setTypes($_POST["types"]);
+                        $bloc->setZones($_POST["zones"]);
+                        $bloc->setDescription($_POST["desc"]);
+                        # TODO name change
+                        # TODO file change
+                        if (array_key_exists("images", $_FILES) && count($_FILES["images"]["name"]) > 0&& strlen($_FILES["images"]["name"][0]) > 0) {
+                            $bloc->deleteFiles();
+                            $bloc->updateImages($_FILES["images"]);
+                        }
+                        $bloc->save();
+                        header("location: ?c=Pan&f=see&name=" . $bloc->getName());
+                    } else
                         ViewManager::callPan("edit", $bloc);
                     else
                         CustomError::call("Vous ne pouvez pas éditer ce bloc");
@@ -71,6 +85,7 @@
                 $bloc = ModelBloc::getByName($_GET["name"]);
                 if ($bloc != False) {
                     if (UserUtils::isAdmin() || UserUtils::getLogin() == $bloc->getCreator()) {
+                        $bloc->deleteFiles();
                         $bloc->delete();
                         ViewManager::callUser("home", $_SESSION["user_model"]);
                     } else

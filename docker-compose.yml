@@ -54,7 +54,7 @@ services:
       - MYSQL_DATABASE=${SQL_DATABASE}
       - MYSQL_ROOT_PASSWORD=${SQL_ROOTPASSWORD}
     volumes:
-      - ./${SQL_DATA_PATH}:/var/lib/mysql/
+      - ${SQL_DATA_PATH}:/var/lib/mysql/
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ema_aubergine
