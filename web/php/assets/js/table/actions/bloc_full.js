@@ -17,7 +17,9 @@ function user_bloc(div, bloc) {
     a.appendChild(i); 
 
     a = document.createElement("a");
-    a.href = "?c=Pan&f=delete&name=" + bloc["name"];
+    a.addEventListener("click", () => {
+        confirmPOP("?c=Pan&f=delete&name=" + bloc["name"], "Êtes vous sûrs de vouloir supprimer " + bloc["name"] +" ?");
+    });
     d.appendChild(a);
     i = document.createElement("i");
     i.className = "fa-solid fa-trash"

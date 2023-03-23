@@ -186,9 +186,8 @@ class ModelBloc implements  Model {
 
     public function deleteFiles(){
         foreach ($this->getImages() as $img) {
-            unlink("files/blocs/" . $this->name . "/images/" . $img);
+            unlink("files/blocs/" . $this->name . "/" . $img);
         }
-        rmdir("files/blocs/" . $this->name . "/images");
         rmdir("files/blocs/" . $this->name);
     }
 
@@ -240,7 +239,7 @@ class ModelBloc implements  Model {
     public function getImagesPath() {
         $images = [];
         foreach (json_decode($this->images) as $f) {
-            $images[] = "files/blocs/" . $this->name . "/images/" . $f;
+            $images[] = "files/blocs/" . $this->name . "/" . $f;
         } 
         return $images;
     }
@@ -314,7 +313,7 @@ class ModelBloc implements  Model {
         if (count($images["name"]) > 3) {
             CustomError::call("Tu ne peux pas upload plus de 3 images");
         } else {
-            $folder = "files/blocs/" . $this->name . "/images/"; 
+            $folder = "files/blocs/" . $this->name . "/"; 
             if (!file_exists($folder)) {
                 mkdir($folder, 0777, true);
             } else {
@@ -339,5 +338,9 @@ class ModelBloc implements  Model {
     
             $this->images = json_encode($new_images);
         }
+    }
+
+    public function moveFilesTo($path) {
+        rename("files/blocs/" . $this->name, $path);
     }
 }

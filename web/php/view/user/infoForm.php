@@ -33,11 +33,11 @@
         <div class="inline responsive">
                 <div>
                         <label><h3>E-Mail</h3></label>
-                        <input type="mail" name="email" value="<?echo $var->getEmail()?>" required>
+                        <input type="mail" name="email" value="<?echo $var->getEmail()?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 </div>
                 <div>
                         <label><h3>Téléphone</h3></label>
-                        <input type="tel" name="phone" value="<?echo $var->getPhone()?>" required>
+                        <input type="tel" name="phone" value="<?echo $var->getPhone()?>" pattern="[0-9]{10}" required>
                 </div>
         </div>
         <div class="inline center">

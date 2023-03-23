@@ -5,9 +5,10 @@
         <link rel="icon" href="assets/img/icon.ico">
         <title>EMA Aubergine</title>
         <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+        <script src="assets/js/popup.js"></script>
+        <link rel="stylesheet" href="assets/css/popup.css" type="text/css">
+        
         <script src="https://kit.fontawesome.com/7ab6419628.js" crossorigin="anonymous"></script>
-        
-        
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZPCPH2HVVB"></script>
         <script>

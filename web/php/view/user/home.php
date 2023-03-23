@@ -10,7 +10,7 @@
 </div>
 <div class="inline">
     <a class="button" href="./?c=User&f=password">Changer de mot de passe</a>
-    <a class="button red" href="./?c=User&f=disconnect">Se déconnecter</a>
+    <a class="button red" onclick="confirmPOP('./?c=User&f=disconnect', 'Êtes vous sûrs de vouloir vous déconnecter ?');">Se déconnecter</a>
 </div>
 <?
 if (UserUtils::hasType("OUVREUR")) {

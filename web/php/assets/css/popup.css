@@ -1,0 +1,12 @@
+
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: max(25vh, 25vw);
+    
+    background-color: rgba(20, 20, 20, 0.95);
+
+    height: calc(100vh - max(25vh, 25vw)*2);
+    width: calc(100vw - max(25vh, 25vw)*2);
+}

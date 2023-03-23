@@ -3,7 +3,9 @@ function user_actions(div, user) {
     d.className = "inline center";
 
     let a = document.createElement("a");
-    a.href = "?c=Admin&f=deleteUser&login=" + user["login"];
+    a.addEventListener("click", () => {
+        confirmPOP("?c=Admin&f=deleteUser&login=" + user["login"], "Êtes vous sûrs de vouloir supprimer " + user["login"] + " ?");
+    });
     d.appendChild(a);
     let i = document.createElement("i");
     i.className = "fa-solid fa-trash"
@@ -11,7 +13,9 @@ function user_actions(div, user) {
 
 
     a = document.createElement("a");
-    a.href = "?c=Admin&f=regeneratepassword&login=" + user["login"];
+    a.addEventListener("click", () => {
+        confirmPOP("?c=Admin&f=regeneratepassword&login=" + user["login"], "Êtes vous sûrs de vouloir regenerer le mot de passe de " + user["login"] + " ?");
+    });
     d.appendChild(a);
     i = document.createElement("i");
     i.className = "fa-solid fa-unlock"
