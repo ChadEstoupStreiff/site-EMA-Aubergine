@@ -11,11 +11,14 @@ window.onload = function() {
         if (this.files.length > 0) {
             var url = URL.createObjectURL(this.files[this.files.length -1]);
             var img_inf = new Image();
+
+            var top = document.createElement("div");
+            canva_root.appendChild(top);
             img_inf.onload = function() {
                 let canva = document.createElement("canvas");
                 canva.width = img_inf.width;
                 canva.height = img_inf.height;
-                canva_root.appendChild(canva);
+                top.appendChild(canva);
 
                 var canvaLeft = canva.offsetLeft + canva.clientLeft,
                 canvaTop = canva.offsetTop + canva.clientTop;
