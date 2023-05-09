@@ -1,0 +1,19 @@
+#bloc_images_canva {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 30px;
+}
+#bloc_images_canva>div {
+    flex-wrap: wrap;
+}
+
+#bloc_images_canva canvas {
+    border-radius: 40px;
+}
+
+#bloc_images_canva img {
+    width: 300px;
+    margin: 30px;
+}
+#bloc_images_canva>img {
+    width: 80vw;
+}

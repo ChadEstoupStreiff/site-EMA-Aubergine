@@ -22,6 +22,7 @@ CREATE TABLE `Bloc` (
   `zones` varchar(128) NOT NULL,
   `description` varchar(1024),
   `images` varchar(256) NOT NULL,
+  `holds` varchar(2048),
   CONSTRAINT PK_Bloc PRIMARY KEY (name),
   CONSTRAINT FK_Bloc_User FOREIGN KEY (creator) REFERENCES User(login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -3,7 +3,7 @@ require_once('./model/Model.php');
 class ModelUser implements  Model {
 
     static public function getListClass() {
-        return ["Externe", "Ancien", "FIG", "INFRES13", "INFRES14", "INFRES15"];
+        return ["Externe", "Ancien", "FIG1A", "FIG2A", "FIG3A", "FIA1A", "FIA2A", "FIA3A"];
     }
 
     private $type;

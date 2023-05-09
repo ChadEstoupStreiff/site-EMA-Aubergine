@@ -11,7 +11,7 @@ class ModelBloc implements  Model {
     }
 
     public static function getListZones() {
-        return ["porte", "dever gauche"];
+        return ["Porte gauche", "Porte droit", "devers gauche", "devers droit", "dalle gauche", "dalle droit", "devers fond droit", "dalle fond"];
     }
 
     private $name;
@@ -22,8 +22,9 @@ class ModelBloc implements  Model {
     private $zones;
     private $description;
     private $images;
+    private $holds;
 
-    public function __construct($name = NULL, $difficulty = NULL, $creator = NULL, $date = NULL, $types = NULL, $zones = NULL, $description = NULL) {
+    public function __construct($name = NULL, $difficulty = NULL, $creator = NULL, $date = NULL, $types = NULL, $zones = NULL, $description = NULL, $holds = NULL) {
         $this->setName($name);
         $this->setDifficulty($difficulty);
         $this->setCreator($creator);
@@ -31,6 +32,7 @@ class ModelBloc implements  Model {
         $this->setTypes($types);
         $this->setZones($zones);
         $this->setDescription($description);
+        $this->setHolds($holds);
         if ($this->images == NULL)
             $this->images = "[]";
     }
@@ -236,6 +238,10 @@ class ModelBloc implements  Model {
         return json_decode($this->images, true);
     }
 
+    public function getHolds() {
+        return json_decode($this->holds, true);
+    }
+
     public function getImagesPath() {
         $images = [];
         foreach (json_decode($this->images) as $f) {
@@ -295,6 +301,12 @@ class ModelBloc implements  Model {
     public function setZones($zones) {
         if (!is_null($zones)) {
             $this->zones = json_encode($zones);
+        }
+    }
+
+    public function setHolds($holds) {
+        if (!is_null($holds)) {
+            $this->holds = json_encode($holds);
         }
     }
 

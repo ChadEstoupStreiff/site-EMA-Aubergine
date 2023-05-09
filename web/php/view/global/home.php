@@ -9,11 +9,11 @@
         <div class="inline center">
             <div>
                 <img width="250px" src="assets/img/momo.jpg" alt="morgane">
-                <h3>Morgan Moysan</h3>
+                <h3>Elouan<br/>Lahellec</h3>
             </div>
             <div>
                 <img width="250px" src="assets/img/paul.jpg" alt="paul">
-                <h3>Paul Daran</h3>
+                <h3>Chad<br/>Estoup--Streiff</h3>
             </div>
         </div>
     </div>

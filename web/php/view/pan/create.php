@@ -1,3 +1,6 @@
+<script src='assets/js/form_bloc.js'></script>
+<link rel="stylesheet" href="assets/css/bloc_create.css" type="text/css">
+
 <h2 class="lettopclear">Ouvrir un bloc</h2>
 <hr/>
 <form method="post" action="./?c=Pan&f=create" class="center" enctype="multipart/form-data">
@@ -47,7 +50,8 @@
     <div class="center">
         <div class="center">
             <h3>Images</h3>
-            <input type="file" name="images[]" accept=".png, .jpeg, .jpg, .gif" multiple required>
+            <input id="bloc_images" type="file" name="images[]" accept=".png, .jpeg, .jpg, .gif" multiple required>
+            <div id="bloc_images_canva" class="center"></div>
         </div>
     </div>
     
