@@ -12,7 +12,9 @@ window.onload = function() {
         var ctx = canva.getContext("2d");
         ctx.drawImage(img_inf, 0, 0);
 
-        var holds = await getHolds(document.getElementById("bloc_name").innerHTML)
+        var holds = await getHolds(
+            document.getElementById("main_canva").getAttribute("data-apiurl"),
+            document.getElementById("bloc_name").innerHTML);
         holds = JSON.parse(holds["holds"]);
         console.log(holds);
 
@@ -31,11 +33,7 @@ window.onload = function() {
     img_inf.src = document.getElementById("main_canva").getAttribute("data-src");
 };
 
-async function getHolds(name) {
-    const request = new XMLHttpRequest();
-    var url = "http://localhost:8082"
-
-    console.log(url);
-    const response = await fetch(url + "/bloc/" + name);
+async function getHolds(api_url, name) {
+    const response = await fetch(api_url + "/bloc/" + name);
     return response.json();
 }

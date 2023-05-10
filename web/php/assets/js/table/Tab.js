@@ -1,7 +1,4 @@
 async function getJSONAPI(url) {
-    const request = new XMLHttpRequest();
-
-    console.log(url);
     const response = await fetch(url);
     return response.json();
 }
