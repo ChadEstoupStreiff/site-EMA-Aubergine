@@ -29,9 +29,11 @@
 ?>
 <div class="inline center responsive">
     <?
-        for ($i = 1; $i <= sizeof($images); $i++) {
-            $image = $images[$i];
-            echo "<img src='" . $image . "' alt='photo'/>";
+        if (sizeof($images) > 1) {
+            for ($i = 1; $i <= sizeof($images); $i++) {
+                $image = $images[$i];
+                echo "<img src='" . $image . "' alt='photo'/>";
+            }
         }
     ?>
 </div>
