@@ -2,7 +2,24 @@
 <hr>
 <div class="center inline responsive">
     <div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>
+            Bienvenue sur le site officiel des Aubergines, l'association d'escalade des Mines d'Alès !
+            Nous sommes une communauté passionnée par l'escalade et nous accueillons chaleureusement les étudiants, le personnel et tous les amoureux de ce sport captivant.
+            <br/>
+            <br/>
+            Que vous soyez débutant ou expérimenté, nous offrons un environnement propice à l'apprentissage, à l'entraînement et à l'épanouissement de chacun.
+            Notre association organise régulièrement des sorties en falaise, des séances d'entraînement et des compétitions amicales pour vous permettre de pratiquer l'escalade dans des cadres variés.
+            <br/>
+            <br/>
+            L'équipe des Aubergines vous souhaite une expérience d'escalade enrichissante et divertissante.
+            Nous sommes impatients de vous rencontrer et de partager des moments mémorables sur les parois.
+            <br/>
+            <br/>
+            À bientôt !
+            <br/>
+            <br/>
+            L'équipe des Aubergines.
+        </p>
     </div>
     <div class="center">
         <h1>Les capis !</h1>
