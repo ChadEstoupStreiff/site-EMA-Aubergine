@@ -3,7 +3,7 @@
 
 <h2 class="lettopclear">Ouvrir un bloc</h2>
 <hr/>
-<form method="post" action="./?c=Pan&f=create" class="center" enctype="multipart/form-data">
+<form id="bloc_form" method="post" action="./?c=Pan&f=create" class="center" enctype="multipart/form-data">
     <div class="inline center responsive">
         <div class="center">
             <h3>Nom du bloc</h3>
@@ -50,7 +50,7 @@
     <div class="center">
         <div class="center">
             <h3>Images</h3>
-            <input id="bloc_images" type="file" name="images[]" accept=".png, .jpeg, .jpg, .gif" multiple required>
+            <input id="bloc_images" type="file" name="images[]" accept="image/*" multiple required>
             <div id="bloc_images_canva" class="center"></div>
         </div>
     </div>

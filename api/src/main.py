@@ -52,6 +52,6 @@ async def get_blocs(page: int = 0, page_size: int = 10, regex: str = None):
 
 @app.get("/bloc/{name}", tags=["Blocs"])
 async def get_bloc(name: str):
-    request = RequestBuilder(["name", "difficulty", "creator", "date", "types", "zones", "description", "images"], "Bloc")
+    request = RequestBuilder(["name", "difficulty", "creator", "date", "types", "zones", "description", "images", "holds"], "Bloc")
     request.add_condition("name", "%s")
     return request.execute_single(values=(name,))

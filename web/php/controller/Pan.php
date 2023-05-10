@@ -22,7 +22,12 @@
                         else
                             $desc = NULL;
                         
-                        $bloc = new ModelBloc($_POST["name"], $_POST["dif"], UserUtils::getLogin(), date("Y-m-d"), $types, $zones, $desc);
+                        if (array_key_exists("holds", $_POST))
+                            $holds = json_decode($_POST["holds"]);
+                        else
+                            $holds = NULL;
+                        
+                        $bloc = new ModelBloc($_POST["name"], $_POST["dif"], UserUtils::getLogin(), date("Y-m-d"), $types, $zones, $desc, $holds);
                         $bloc->updateImages($_FILES["images"]);
                         $bloc->save();
                         header("location: ?c=Pan&f=see&name=" . $bloc->getName());

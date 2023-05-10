@@ -60,6 +60,11 @@ a:hover {
     cursor: pointer;
 }
 
+canvas {
+    margin: 3vh;
+    border-radius: 3vh;
+}
+
 img, video {
     margin: 3vh;
     max-width: 25vw;

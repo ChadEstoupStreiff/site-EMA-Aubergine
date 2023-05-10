@@ -130,7 +130,7 @@ class ModelBloc implements  Model {
 
     public function save() {
         if (self::getByName($this->getName()) == false) {
-            $sqlI = "INSERT INTO `Bloc`(`name`, `difficulty`, `creator`, `date`, `types`, `zones`, `description`, `images`) VALUES (:name, :difficulty, :creator, :date, :types, :zones, :description, :images)";
+            $sqlI = "INSERT INTO `Bloc`(`name`, `difficulty`, `creator`, `date`, `types`, `zones`, `description`, `images`, `holds`) VALUES (:name, :difficulty, :creator, :date, :types, :zones, :description, :images, :holds)";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sqlI);
                 $values = array(
@@ -142,6 +142,7 @@ class ModelBloc implements  Model {
                     "zones" => $this->zones,
                     "description" => $this->description,
                     "images" => $this->images,
+                    "holds" => $this->holds,
                 );
                 $req_prep->execute($values);
                 return true;
@@ -150,7 +151,7 @@ class ModelBloc implements  Model {
                 return false;
             }
         } else {
-            $sql = "UPDATE `Bloc` SET `difficulty` = :difficulty, `creator` = :creator, `date` = :date, `types` = :types, `zones` = :zones, `description` = :description, `images` = :images WHERE `name` = :name";
+            $sql = "UPDATE `Bloc` SET `difficulty` = :difficulty, `creator` = :creator, `date` = :date, `types` = :types, `zones` = :zones, `description` = :description, `images` = :images, `holds` = :holds WHERE `name` = :name";
             try {
                 $req_prep = DBCom::getPDO()->prepare($sql);
                 $values = array(
@@ -161,6 +162,7 @@ class ModelBloc implements  Model {
                     "types" => $this->types,
                     "zones" => $this->zones,
                     "description" => $this->description,
+                    "holds" => $this->holds,
                     "images" => $this->images,
                 );
                 $req_prep->execute($values);
@@ -200,6 +202,7 @@ class ModelBloc implements  Model {
         $this->setDate($blocRecovered->getDate());
         $this->setTypes($blocRecovered->getTypes());
         $this->setDescription($blocRecovered->getDescription());
+        $this->setHolds($blocRecovered->getHolds());
     }
 
     ################

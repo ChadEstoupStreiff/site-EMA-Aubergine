@@ -1,4 +1,4 @@
-let canva_holds = [];canva_holds
+let canva_holds = [];
 
 window.onload = function() {
     document.getElementById("bloc_images").addEventListener('change', function(){
@@ -7,6 +7,17 @@ window.onload = function() {
         while (canva_root.lastChild != null) {
             canva_root.removeChild(canva_root.lastChild);
         }
+
+        document.getElementById("bloc_form").addEventListener("submit",  function(event){
+            if (canva_holds.length > 0) {
+                var hidden_param = document.createElement("input");
+                hidden_param.name = "holds";
+                hidden_param.type = "text";
+                hidden_param.hidden = true;
+                hidden_param.value = JSON.stringify(canva_holds);
+                document.getElementById("bloc_form").appendChild(hidden_param);
+            }
+        });
 
         if (this.files.length > 0) {
             var url = URL.createObjectURL(this.files[this.files.length -1]);
@@ -36,7 +47,7 @@ window.onload = function() {
                     ctx.strokeStyle = "#FF0000";
                     ctx.lineWidth = 5;
                     ctx.beginPath();
-                    ctx.arc(x,y,30,0,2*Math.PI);
+                    ctx.arc(x,y,20,0,2*Math.PI);
                     ctx.stroke();
                     
                     console.log(canva_holds);

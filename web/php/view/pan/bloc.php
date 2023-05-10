@@ -1,3 +1,5 @@
+<script src='assets/js/bloc.js'></script>
+
 <h1><? echo $var->getName(); ?></h1>
 <h2><? echo $var->getDifficulty(); ?></h2>
 <h3>Ouvert part <a href="?c=User&f=see&login=<? echo $var->getCreator() ?>"><? echo UserUtils::getUser($var->getCreator())->getNickname(); ?></a> le <? echo $var->getDate(); ?></h3>
@@ -21,10 +23,14 @@
     if ($desc != NULL)
         echo "<p>" . $desc . "</p>";
 ?>
+<?
+    $images = array_reverse($var->getImagesPath());
+    echo "<div id='main_canva' data-src='" . $images[0] . "'></div><img src='" . $images[0] . "' alt='mainphoto' id='main_photo' hidden>";
+?>
 <div class="inline center responsive">
     <?
-        $images = $var->getImagesPath();
-        foreach ($images as $image) {
+        for ($i = 1; $i <= sizeof($images); $i++) {
+            $image = $images[$i];
             echo "<img src='" . $image . "' alt='photo'/>";
         }
     ?>
