@@ -1,6 +1,6 @@
 <script src='assets/js/bloc.js'></script>
 
-<h1><? echo $var->getName(); ?></h1>
+<h1 id="bloc_name"><? echo $var->getName(); ?></h1>
 <h2><? echo $var->getDifficulty(); ?></h2>
 <h3>Ouvert part <a href="?c=User&f=see&login=<? echo $var->getCreator() ?>"><? echo UserUtils::getUser($var->getCreator())->getNickname(); ?></a> le <? echo $var->getDate(); ?></h3>
 <hr>

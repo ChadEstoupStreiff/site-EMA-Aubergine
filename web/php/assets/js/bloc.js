@@ -1,6 +1,6 @@
 window.onload = function() {
     var img_inf = new Image();
-    img_inf.onload = function() {
+    img_inf.onload = async function() {
         let canva = document.createElement("canvas");
         canva.width = img_inf.width;
         canva.height = img_inf.height;
@@ -11,6 +11,31 @@ window.onload = function() {
 
         var ctx = canva.getContext("2d");
         ctx.drawImage(img_inf, 0, 0);
+
+        var holds = await getHolds(document.getElementById("bloc_name").innerHTML)
+        holds = JSON.parse(holds["holds"]);
+        console.log(holds);
+
+        holds.forEach(hold => {
+            var x = hold[0],
+            y = hold[1];
+
+            ctx = canva.getContext("2d");
+            ctx.strokeStyle = "#FF0000";
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(x,y,20,0,2*Math.PI);
+            ctx.stroke();  
+        });   
     };
     img_inf.src = document.getElementById("main_canva").getAttribute("data-src");
 };
+
+async function getHolds(name) {
+    const request = new XMLHttpRequest();
+    var url = "http://localhost:8082"
+
+    console.log(url);
+    const response = await fetch(url + "/bloc/" + name);
+    return response.json();
+}

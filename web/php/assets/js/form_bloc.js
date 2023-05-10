@@ -48,9 +48,7 @@ window.onload = function() {
                     ctx.lineWidth = 5;
                     ctx.beginPath();
                     ctx.arc(x,y,20,0,2*Math.PI);
-                    ctx.stroke();
-                    
-                    console.log(canva_holds);
+                    ctx.stroke();                    
                 }, false);
             };
             img_inf.src = url;
