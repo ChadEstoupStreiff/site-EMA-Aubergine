@@ -41,6 +41,10 @@
                     <i class="fab fa-facebook-messenger"></i>
                     <p>Messenger</p>
                 </a>
+                <a href="https://www.instagram.com/les_aubergines_escalade/" class="headerhidden inline center" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <p>Instagram</p>
+                </a>
                 <a href="?c=Pan" class="headerhidden inline center">
                     <i class="fas fa-dumbbell"></i>
                     <p>Blocs Pan</p>

@@ -31,14 +31,14 @@ window.onload = function() {
                 canva.height = img_inf.height;
                 top.appendChild(canva);
 
-                var canvaLeft = canva.offsetLeft + canva.clientLeft,
-                canvaTop = canva.offsetTop + canva.clientTop;
-
                 var ctx = canva.getContext("2d");
                 ctx.drawImage(img_inf, 0, 0);
                 
                 canva_holds = [];
                 canva.addEventListener('click', function(event) {
+                    var canvaLeft = canva.offsetLeft + canva.clientLeft,
+                    canvaTop = canva.offsetTop + canva.clientTop;
+                    
                     var x = event.pageX - canvaLeft,
                     y = event.pageY - canvaTop;
                     canva_holds.push([x, y]);

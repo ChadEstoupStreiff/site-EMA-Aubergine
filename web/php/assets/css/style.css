@@ -61,6 +61,8 @@ a:hover {
 }
 
 canvas {
+    max-height: 80vh;
+    max-width: 80vw;
     margin: 3vh;
     border-radius: 3vh;
 }
@@ -101,8 +103,7 @@ input[type=text], input[type=password], input[type=mail], input[type=tel], selec
     background-color: transparent;
     text-align: center;
 
-    padding: 0.5vh;
-    margin: 2vh;
+    padding: 0.5vh 2vh;
 
     border: 0;
     border-bottom: 2px solid #773ac5;
@@ -118,7 +119,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=mail]:focus, inpu
 input[type=submit], .button, button {
     font-size: 1.5vh;
     text-align: center;
-    padding: 0.5vh 2vh;
     margin: 2vh;
     padding: 1vh 3vh;
     color: white;

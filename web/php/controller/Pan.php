@@ -56,8 +56,6 @@
                             $bloc->setTypes($_POST["types"]);
                             $bloc->setZones($_POST["zones"]);
                             $bloc->setDescription($_POST["desc"]);
-                            # TODO name change
-                            # TODO file change
                             if (array_key_exists("images", $_FILES) && count($_FILES["images"]["name"]) > 0&& strlen($_FILES["images"]["name"][0]) > 0) {
                                 $bloc->deleteFiles();
                                 $bloc->updateImages($_FILES["images"]);
@@ -75,18 +73,15 @@
         } 
 
         static public function see() {
-            if (UserUtils::isConnected())
-                if (array_key_exists("name", $_GET)) {
-                    require_once("model/ModelBloc.php");
-                    $bloc = ModelBloc::getByName($_GET["name"]);
-                    if ($bloc != False)
-                        ViewManager::callPan("bloc", $bloc);
-                    else
-                        CustomError::call("Le bloc n'existe pas");
-                } else
-                    CustomError::call("Précisez un nom de bloc");
-            else
-                UserUtils::askToConnect()  ;              
+            if (array_key_exists("name", $_GET)) {
+                require_once("model/ModelBloc.php");
+                $bloc = ModelBloc::getByName($_GET["name"]);
+                if ($bloc != False)
+                    ViewManager::callPan("bloc", $bloc);
+                else
+                    CustomError::call("Le bloc n'existe pas");
+            } else
+                CustomError::call("Précisez un nom de bloc");
         }
 
         static public function delete() {

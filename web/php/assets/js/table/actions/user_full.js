@@ -2,15 +2,13 @@ function user_actions(div, user) {
     let d = document.createElement("div");
     d.className = "inline center";
 
+
     let a = document.createElement("a");
-    a.addEventListener("click", () => {
-        confirmPOP("?c=Admin&f=deleteUser&login=" + user["login"], "Êtes vous sûrs de vouloir supprimer " + user["login"] + " ?");
-    });
+    a.href = "?c=User&f=see&login=" + user["login"];
     d.appendChild(a);
     let i = document.createElement("i");
-    i.className = "fa-solid fa-trash"
-    a.appendChild(i);
-
+    i.className = "fa-solid fa-eye"
+    a.appendChild(i); 
 
     a = document.createElement("a");
     a.addEventListener("click", () => {
@@ -19,6 +17,15 @@ function user_actions(div, user) {
     d.appendChild(a);
     i = document.createElement("i");
     i.className = "fa-solid fa-unlock"
+    a.appendChild(i);
+
+    a = document.createElement("a");
+    a.addEventListener("click", () => {
+        confirmPOP("?c=Admin&f=deleteUser&login=" + user["login"], "Êtes vous sûrs de vouloir supprimer " + user["login"] + " ?");
+    });
+    d.appendChild(a);
+    i = document.createElement("i");
+    i.className = "fa-solid fa-trash"
     a.appendChild(i);
 
     let s = document.createElement("select");

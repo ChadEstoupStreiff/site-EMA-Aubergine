@@ -20,26 +20,11 @@ class Tab {
 
     init() {
         let div = document.createElement("div");
-        div.className = "inline center"
+        div.className = "inline center responsive"
         this.table.appendChild(div);
 
-        let b = document.createElement("button");
-        b.innerHTML = "<";
-        b.addEventListener("click", () => {
-            this.page--;
-            this.update();
-        });
-        div.appendChild(b)
-        this.pageElement = document.createElement("h3");
-        this.pageElement.innerHTML = 0;
-        div.appendChild(this.pageElement);
-        b = document.createElement("button");
-        b.innerHTML = ">";
-        b.addEventListener("click", () => {
-            this.page++;
-            this.update();
-        });
-        div.appendChild(b)
+
+
         this.input = document.createElement("input");
         this.input.type = "text";
         this.input.addEventListener("keypress", (e) => {
@@ -47,6 +32,29 @@ class Tab {
                 this.update();
         });
         div.appendChild(this.input)
+
+        let div_buttons = document.createElement("div");
+        div_buttons.className = "inline center"
+        div.appendChild(div_buttons);
+
+        let b = document.createElement("button");
+        b.innerHTML = "<";
+        b.addEventListener("click", () => {
+            this.page--;
+            this.update();
+        });
+        div_buttons.appendChild(b)
+        this.pageElement = document.createElement("h3");
+        this.pageElement.innerHTML = 0;
+        div_buttons.appendChild(this.pageElement);
+        b = document.createElement("button");
+        b.innerHTML = ">";
+        b.addEventListener("click", () => {
+            this.page++;
+            this.update();
+        });
+        div_buttons.appendChild(b)
+
 
         this.lines = document.createElement("div");
         this.lines.className = "lines";
