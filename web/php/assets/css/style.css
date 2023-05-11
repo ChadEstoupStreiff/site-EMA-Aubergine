@@ -69,8 +69,8 @@ canvas {
 
 img, video {
     margin: 3vh;
-    max-width: 25vw;
-    max-height: 40vh;
+    max-width: 40vw;
+    max-height: 60vh;
     border-radius: 3vh;
 }
 
