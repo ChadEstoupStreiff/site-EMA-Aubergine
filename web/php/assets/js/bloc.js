@@ -4,10 +4,9 @@ window.onload = function() {
         let canva = document.createElement("canvas");
         canva.width = img_inf.width;
         canva.height = img_inf.height;
+        var circlesize = parseInt(Math.min(img_inf.width, img_inf.height) /20);
+        var paintsize = parseInt(Math.min(img_inf.width, img_inf.height) /80);
         document.getElementById("main_canva").appendChild(canva);
-
-        var canvaLeft = canva.offsetLeft + canva.clientLeft,
-        canvaTop = canva.offsetTop + canva.clientTop;
 
         var ctx = canva.getContext("2d");
         ctx.drawImage(img_inf, 0, 0);
@@ -24,9 +23,9 @@ window.onload = function() {
 
             ctx = canva.getContext("2d");
             ctx.strokeStyle = "#FF0000";
-            ctx.lineWidth = 5;
+            ctx.lineWidth = paintsize;
             ctx.beginPath();
-            ctx.arc(x,y,20,0,2*Math.PI);
+            ctx.arc(x,y,circlesize,0,2*Math.PI);
             ctx.stroke();  
         });   
     };
