@@ -300,7 +300,7 @@ header img {
     }
 
     img, video {
-        max-width: 90vw;
+        max-width: 60vw;
         max-height: 60vh;
     }
 
