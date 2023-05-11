@@ -30,7 +30,7 @@
 <div class="inline center responsive">
     <?
         if (sizeof($images) > 1) {
-            for ($i = 1; $i <= sizeof($images); $i++) {
+            for ($i = 1; $i < sizeof($images); $i++) {
                 $image = $images[$i];
                 echo "<img src='" . $image . "' alt='photo'/>";
             }
