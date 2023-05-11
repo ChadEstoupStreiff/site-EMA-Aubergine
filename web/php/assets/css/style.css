@@ -274,6 +274,7 @@ header i{
 }
 
 header img {
+    margin: 0;
     width: 3.5vh;
 }
 
