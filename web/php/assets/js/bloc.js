@@ -5,7 +5,7 @@ window.onload = function() {
         canva.width = img_inf.width;
         canva.height = img_inf.height;
         var circlesize = parseInt(Math.min(img_inf.width, img_inf.height) /20);
-        var paintsize = parseInt(Math.min(img_inf.width, img_inf.height) /80);
+        var paintsize = parseInt(Math.min(img_inf.width, img_inf.height) /100);
         document.getElementById("main_canva").appendChild(canva);
 
         var ctx = canva.getContext("2d");
