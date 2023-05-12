@@ -33,15 +33,15 @@
                             <p>Admin</p>
                         </a>"
                 ?>
-                <a href="https://www.facebook.com/groups/1700851880151381" class="headerhidden inline center" target="_blank">
+                <a href="<? echo Params::getParam("URL_FACEBOOK") ?>" class="headerhidden inline center" target="_blank">
                     <i class="fab fa-facebook"></i></i>
                     <p>Facebook</p>
                 </a>
-                <a href="https://www.facebook.com/messages/t/2207624789268700" class="headerhidden inline center" target="_blank">
+                <a href="<? echo Params::getParam("URL_MESSENGER") ?>" class="headerhidden inline center" target="_blank">
                     <i class="fab fa-facebook-messenger"></i>
                     <p>Messenger</p>
                 </a>
-                <a href="https://www.instagram.com/les_aubergines_escalade/" class="headerhidden inline center" target="_blank">
+                <a href="<? echo Params::getParam("URL_INSTA") ?>" class="headerhidden inline center" target="_blank">
                     <i class="fab fa-instagram"></i>
                     <p>Instagram</p>
                 </a>

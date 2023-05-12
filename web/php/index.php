@@ -4,6 +4,7 @@
 require_once('/var/www/config/Conf.php');
 require_once("model/ModelUser.php");
 require_once("utils/UserUtils.php");
+require_once("utils/Params.php");
 require_once("utils/ViewManager.php");
 if (!Conf::isPhpLogEnable())
     error_reporting(E_ERROR | E_PARSE);

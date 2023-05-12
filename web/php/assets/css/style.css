@@ -99,6 +99,11 @@ div.error {
 }
 
 /* FORMS */
+
+input {
+    margin: 20px;
+}
+
 input[type=text], input[type=password], input[type=mail], input[type=tel], select {
     background-color: transparent;
     text-align: center;

@@ -100,4 +100,17 @@
                 ViewManager::callAdmin('home');
             }
         }
+
+        public static function params()
+        {
+            if (UserUtils::askToConnectAndHasType("ADMIN")) {
+                if (!empty($_POST)) {
+                    foreach ($_POST as $key => $value) {
+                        Params::setParam($key, $value);
+                    }
+                    ViewManager::callAdmin('home');
+                } else
+                    ViewManager::callAdmin('params');
+            }
+        }
     }

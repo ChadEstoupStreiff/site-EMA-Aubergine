@@ -25,7 +25,7 @@
 ?>
 <?
     $images = array_reverse($var->getImagesPath());
-    echo "<div id='main_canva' data-src='" . $images[0] . "' data-apiurl='" . Conf::getAPI() . "'></div><img src='" . $images[0] . "' alt='mainphoto' id='main_photo' hidden>";
+    echo "<div id='main_canva' data-src='" . htmlentities($images[0]) . "' data-apiurl='" . Conf::getAPI() . "'></div><img src='" . $images[0] . "' alt='mainphoto' id='main_photo' hidden>";
 ?>
 <div class="inline center responsive">
     <?
