@@ -14,7 +14,7 @@
             <select name="dif" required>
                 <?
                     foreach (ModelBloc::getListDifficulties() as $diff) {
-                        echo "<option value='" . $diff . "'>" . $diff . "</option>";
+                        echo "<option value='" . htmlentities($diff) . "'>" . htmlentities($diff) . "</option>";
                     }
                 ?>
             </select>
@@ -26,7 +26,7 @@
             <select multiple name="types[]">
                 <?
                     foreach (ModelBloc::getListTypes() as $type) {
-                        echo "<option valie='" . $type . "'>" . $type . "</option>";
+                        echo "<option value='" . htmlentities($type) . "'>" . htmlentities($type) . "</option>";
                     }
                 ?>
             </select>
@@ -36,7 +36,7 @@
             <select multiple name="zones[]">
                 <?
                     foreach (ModelBloc::getListZones() as $zone) {
-                        echo "<option valie='" . $zone . "'>" . $zone . "</option>";
+                        echo "<option value='" . htmlentities($zone) . "'>" . htmlentities($zone) . "</option>";
                     }
                 ?>
             </select>

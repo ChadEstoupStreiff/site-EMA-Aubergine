@@ -4,7 +4,7 @@
         <div class="inline responsive">
                 <div>
                         <label><h3>Pseudo</h3></label>
-                        <input type="text" name="nickname" value="<?echo $var->getNickName()?>" required>
+                        <input type="text" name="nickname" value="<?echo htmlentities($var->getNickName())?>" required>
                 </div>
                 <div>
                         <label><h3>Classe</h3></label>
@@ -12,7 +12,7 @@
                                 <?
                                         require_once('model/ModelUser.php');
                                         foreach (ModelUser::getListClass() as $class) {
-                                                echo "<option value='" . $class . "'>" . $class . "</option>";
+                                                echo "<option value='" . htmlentities($class) . "'>" . htmlentities($class) . "</option>";
                                         }
                                 ?>
                         </select>
@@ -22,22 +22,22 @@
         <div class="inline responsive">
                 <div>
                         <label><h3>Niveau difficulté</h3></label>
-                        <input type="text" name="nivdif" value="<?echo $var->getNivDif()?>" required>
+                        <input type="text" name="nivdif" value="<?echo htmlentities($var->getNivDif())?>" required>
                 </div>
                 <div>
                         <label><h3>Niveau bloc</h3></label>
-                        <input type="text" name="nivbloc" value="<?echo $var->getNivBloc()?>" required>
+                        <input type="text" name="nivbloc" value="<?echo htmlentities($var->getNivBloc())?>" required>
                 </div>
         </div>
 
         <div class="inline responsive">
                 <div>
                         <label><h3>E-Mail</h3></label>
-                        <input type="mail" name="email" value="<?echo $var->getEmail()?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                        <input type="mail" name="email" value="<?echo htmlentities($var->getEmail())?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 </div>
                 <div>
                         <label><h3>Téléphone</h3></label>
-                        <input type="tel" name="phone" value="<?echo $var->getPhone()?>" pattern="[0-9]{10}" required>
+                        <input type="tel" name="phone" value="<?echo htmlentities($var->getPhone())?>" pattern="[0-9]{10}" required>
                 </div>
         </div>
         <div class="inline center">
@@ -52,7 +52,7 @@
 
         <hr/>
         <label><h3>Description</h3></label>
-        <textarea name="desc" required><?echo $var->getDescription()?></textarea>
+        <textarea name="desc" required><?echo htmlentities($var->getDescription())?></textarea>
 
 
         <input type="submit" class="button" value="Mettre à jour">

@@ -38,11 +38,15 @@ window.onload = function() {
                 
                 canva_holds = [];
                 canva.addEventListener('click', function(event) {
-                    var canvaLeft = canva.offsetLeft + canva.clientLeft,
-                    canvaTop = canva.offsetTop + canva.clientTop;
-                    
-                    var x = event.pageX - canvaLeft,
-                    y = event.pageY - canvaTop;
+                    var w = canva.offsetWidth,
+                    h = canva.offsetHeight;
+
+                    var w_scale = img_inf.width/w,
+                    h_scale = img_inf.height/h;
+
+                    var rect = canva.getBoundingClientRect(), /// get absolute rect. of canvas
+                    x = (event.clientX - rect.left) * w_scale,         /// adjust for x
+                    y = (event.clientY - rect.top) * h_scale;          /// adjust for y
                     canva_holds.push([x, y]);
                     
                     ctx = canva.getContext("2d");

@@ -1,12 +1,12 @@
-<h2>Bonjour <a href="?c=User&f=see&login=<? echo $var->getLogin() ?>"><?php echo $var->getNickName()?></a> !</h2>
+<h2>Bonjour <a href="?c=User&f=see&login=<? echo htmlentities($var->getLogin()) ?>"><?php echo htmlentities($var->getNickName())?></a> !</h2>
 
 <hr/>
 
-<h3>Utilisateur: <?php echo $var->getLogin()?></h3>
-<h3>Type: <?php echo $var->getType()?></h3>
+<h3>Utilisateur: <?php echo htmlentities($var->getLogin())?></h3>
+<h3>Type: <?php echo htmlentities($var->getType())?></h3>
 <div class="inline">
     <a class="button" href="./?c=User&f=informations">Changer ses informations</a>
-    <a class="button" href="./?c=User&f=see&login=<? echo UserUtils::getLogin() ?>">Voir mon profil</a>
+    <a class="button" href="./?c=User&f=see&login=<? echo htmlentities(UserUtils::getLogin()) ?>">Voir mon profil</a>
 </div>
 <div class="inline">
     <a class="button" href="./?c=User&f=password">Changer de mot de passe</a>
