@@ -108,7 +108,19 @@
                     foreach ($_POST as $key => $value) {
                         Params::setParam($key, $value);
                     }
-                    ViewManager::callAdmin('home');
+                    if (array_key_exists("img_CAPI1", $_FILES) && strlen($_FILES["img_CAPI1"]["name"]) > 0) {
+                        $tmpFilePath = $_FILES["img_CAPI1"]['tmp_name'];
+                        unlink("assets/img/CAPI1.png");
+                        if ($tmpFilePath != "")
+                            move_uploaded_file($tmpFilePath, "assets/img/CAPI1.png");
+                    }
+                    if (array_key_exists("img_CAPI1", $_FILES) && strlen($_FILES["img_CAPI2"]["name"]) > 0) {
+                        $tmpFilePath = $_FILES["img_CAPI2"]['tmp_name'];
+                        unlink("assets/img/CAPI2.png");
+                        if ($tmpFilePath != "")
+                            move_uploaded_file($tmpFilePath, "assets/img/CAPI2.png");
+                    }
+                    header('location: ./?c=Admin');
                 } else
                     ViewManager::callAdmin('params');
             }

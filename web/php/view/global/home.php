@@ -8,11 +8,11 @@
         <h1>Les capis !</h1>
         <div class="inline center">
             <div>
-                <img width="250px" src="assets/img/momo.jpg" alt="morgane">
+                <img width="250px" src="assets/img/CAPI1.png" alt="morgane">
                 <h3><? echo Params::getParam("CAPI1") ?></h3>
             </div>
             <div>
-                <img width="250px" src="assets/img/paul.jpg" alt="paul">
+                <img width="250px" src="assets/img/CAPI2.png" alt="paul">
                 <h3><? echo Params::getParam("CAPI2") ?></h3>
             </div>
         </div>

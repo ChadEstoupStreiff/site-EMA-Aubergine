@@ -1,6 +1,6 @@
 <h2>Paramètres du site</h2>
 <hr />
-<form action="./?c=Admin&f=params" method="post" class="center">
+<form action="./?c=Admin&f=params" method="post" class="center" enctype="multipart/form-data">
     <div class="inline">
         <div>
             <label><h3>Capitaine 1</h3></label>
@@ -9,6 +9,14 @@
         <div>
             <label><h3>Capitaine 2</h3></label>
             <input type="text" name="CAPI2" value="<? echo Params::getParam("CAPI2") ?>" required>
+        </div>
+    </div>
+    <div class="inline">
+        <div>
+            <input type="file" name="img_CAPI1" accept="image/*">
+        </div>
+        <div>
+            <input type="file" name="img_CAPI2" accept="image/*">
         </div>
     </div>
     <div class="inline">
