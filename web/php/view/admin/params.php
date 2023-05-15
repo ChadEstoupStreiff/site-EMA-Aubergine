@@ -19,7 +19,7 @@
             <input type="file" name="img_CAPI2" accept="image/*">
         </div>
     </div>
-    <div class="inline">
+    <div class="inline responsive">
         <div>
             <label><h3>Facebook URL</h3></label>
             <input type="text" name="URL_FACEBOOK" value="<? echo Params::getParam("URL_FACEBOOK") ?>" required>
