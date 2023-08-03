@@ -4,3 +4,7 @@ uvicorn[standard]
 python-multipart
 pydantic
 python-dotenv
+
+PyJWT==2.6.0
+mysql-connector-python==8.0.31
+bcrypt

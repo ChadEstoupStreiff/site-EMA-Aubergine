@@ -12,6 +12,9 @@ WORKDIR /
 COPY requirements.txt /requirements.txt
 RUN pip3 install -r requirements.txt
 
+# app
+COPY src /app
+
 # LAUNCH
 WORKDIR /app
 CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "80"]

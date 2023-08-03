@@ -1,2 +1,11 @@
-FROM php:8.2.1-apache
-RUN docker-php-ext-install pdo pdo_mysql
+FROM node:16-alpine
+
+# APP
+WORKDIR /app
+COPY app /app
+
+RUN npm install
+EXPOSE 3000
+
+# RUN
+CMD npm run dev

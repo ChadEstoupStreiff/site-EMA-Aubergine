@@ -14,7 +14,7 @@ services:
     restart: always
     volumes:
       - ./api/src:/app
-      - .env:/app/.env
+      - .env:/.env
 
     ports:
       - ${API_PORT}:80
@@ -33,12 +33,10 @@ services:
     container_name: ema_aubergine_web
     restart: always
     volumes:
-      - ./web/php/:/var/www/html/
-      - ./web/config/:/var/www/config/
-      - ./web/php.ini:/usr/local/etc/php/conf.d/custom.php.ini
+      - ./web/app/:/app/
 
     ports:
-      - ${WEB_PORT}:80
+      - ${WEB_PORT}:3000
     networks:
       - ema_aubergine
 
@@ -49,8 +47,6 @@ services:
     container_name: ema_aubergine_database
     restart: always
     environment:
-      - MYSQL_USER=${SQL_USER}
-      - MYSQL_PASSWORD=${SQL_PASSWORD}
       - MYSQL_DATABASE=${SQL_DATABASE}
       - MYSQL_ROOT_PASSWORD=${SQL_ROOTPASSWORD}
     volumes:
@@ -58,7 +54,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ema_aubergine
-    hostname: ema_aubergine_database
+    hostname: aubergines_database
 
   ema_aubergine_phpmyadmin:
     env_file:

@@ -5,13 +5,13 @@ CREATE TABLE `Params` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `User` (
-  `type` varchar(8) NOT NULL,
   `login` varchar(32) NOT NULL,
+  `password` BLOB(512) NOT NULL,
   `nickname` varchar(32) NOT NULL,
-  `password` varchar(60) NOT NULL,
+  `class` varchar(10) NOT NULL,
+  `type` varchar(8) NOT NULL,
   `email` varchar(60) NULL,
   `phone` varchar(20) NULL,
-  `class` varchar(10) NOT NULL,
   `description` varchar(512) NULL,
   `nivbloc` varchar(3) NULL,
   `nivdif` varchar(3) NULL,
@@ -32,34 +32,6 @@ CREATE TABLE `Bloc` (
   CONSTRAINT PK_Bloc PRIMARY KEY (name),
   CONSTRAINT FK_Bloc_User FOREIGN KEY (creator) REFERENCES User(login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- User: admin, mdp: admin
-INSERT INTO User (
-  `type`,
-  `login`,
-  `nickname`,
-  `password`,
-  `email`,
-  `phone`,
-  `class`,
-  `description`,
-  `nivbloc`,
-  `nivdif`,
-  `show`
-)
-VALUES(
-  "ADMIN",
-  "admin",
-  "Administrateur",
-  "$2y$10$LxqroyFI2y1zgCrATdLZluN2y1oBwCWANeaMTPVY/U7CHM0Dbzvbe",
-  "***",
-  "***",
-  "***",
-  "***",
-  "***",
-  "***",
-  0
-);
 
 --Default params
 INSERT INTO `Params` (`key_id`, `value`) VALUES

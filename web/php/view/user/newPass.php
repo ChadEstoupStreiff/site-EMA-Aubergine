@@ -1,1 +1,0 @@
-<h2>Nouveau mot de passe: <?php echo htmlentities($var) ?></h2>
