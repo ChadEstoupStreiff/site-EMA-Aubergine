@@ -1,5 +1,5 @@
 import logging
-from typing import Union, List, Any, Tuple
+from typing import Union, List, Any, Tuple, Dict
 
 import mysql.connector
 import time
@@ -47,7 +47,7 @@ class DB:
         self.conn.commit()
         return affected > 0
 
-    def execute(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[List[Any]], None]:
+    def execute(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[List[Any]], List[Dict[str, Any]], None]:
         if values is None:
             values = ()
         cursor = self._get_cursor()
@@ -66,7 +66,7 @@ class DB:
             cursor.close()
         return data
 
-    def execute_single(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[Any], None]:
+    def execute_single(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[Any], Dict[str, Any], None]:
         data = self.execute(query, values, keys)
         if len(data) > 0:
             return data[0]

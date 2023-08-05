@@ -14,32 +14,21 @@ def encrypt(text: str) -> bytes:
     return bcrypt.hashpw(text.encode(), bcrypt.gensalt(rounds=int(config["SALT_LENGTH"])))
 
 
-def get_token(mail: str) -> str:
-    return sign_jwt(mail)
+def get_token(login: str) -> str:
+    return sign_jwt(login)
 
 
-def is_mail(mail: str) -> bool:
-    splitted: list = mail.split('@')
-    if len(splitted) == 2 and len(splitted[0]) > 0 and len(splitted[1]) > 2:
-        splitted_domain: list = splitted[1].split('.')
-        return len(splitted_domain) == 2 and len(splitted_domain[0]) > 0 and len(splitted_domain[1]) > 2
-    return False
+def register_user(login: str, password: str, nickname: str, user_class: str) -> str:
+    password = encrypt(password)
+    if create_user(login, password, nickname, user_class):
+        return get_token(login)
+    raise HTTPException(400, detail="Can't create user")
 
 
-def register_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
-                  user_city: str) -> str:
-    user_password = encrypt(user_password)
-    if is_mail(user_mail):
-        if create_user(user_mail, user_password, user_name, user_sex, user_country, user_city):
-            return get_token(user_mail)
-    else:
-        raise HTTPException(400, detail=f"{user_mail} is not a mail")
-
-
-def check_user(user_mail: str, user_password: str) -> bool:
-    user_encrypted_password = get_user_password(user_mail)
-    return user_encrypted_password is not None and bcrypt.checkpw(user_password.encode(),
-                                                                  bytes(user_encrypted_password))
+def check_user(login: str, password: str) -> bool:
+    encrypted_password = get_user_password(login)
+    return encrypted_password is not None and bcrypt.checkpw(password.encode(),
+                                                             bytes(encrypted_password))
 
 
 def get_user_login_info(token: str) -> Dict[str, str]:

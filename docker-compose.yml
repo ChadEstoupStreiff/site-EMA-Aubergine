@@ -68,6 +68,8 @@ services:
       - ema_aubergine_database
     environment:
       PMA_HOST: ema_aubergine_database
+      PMA_USER: root
+      PMA_PASSWORD: ${SQL_ROOTPASSWORD}
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     networks:

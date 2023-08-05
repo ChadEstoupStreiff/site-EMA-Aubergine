@@ -4,7 +4,7 @@ CREATE TABLE `Params` (
   CONSTRAINT PK_Param PRIMARY KEY (key_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `User` (
+CREATE TABLE `Users` (
   `login` varchar(32) NOT NULL,
   `password` BLOB(512) NOT NULL,
   `nickname` varchar(32) NOT NULL,
@@ -16,10 +16,10 @@ CREATE TABLE `User` (
   `nivbloc` varchar(3) NULL,
   `nivdif` varchar(3) NULL,
   `show` tinyint(1) NOT NULL,
-  CONSTRAINT PK_User PRIMARY KEY (login)
+  CONSTRAINT PK_Users PRIMARY KEY (login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `Bloc` (
+CREATE TABLE `Blocs` (
   `name` varchar(32) NOT NULL,
   `difficulty` varchar(3) NOT NULL,
   `creator` varchar(32) NOT NULL,
@@ -29,8 +29,8 @@ CREATE TABLE `Bloc` (
   `description` varchar(1024),
   `images` varchar(256) NOT NULL,
   `holds` varchar(2048),
-  CONSTRAINT PK_Bloc PRIMARY KEY (name),
-  CONSTRAINT FK_Bloc_User FOREIGN KEY (creator) REFERENCES User(login)
+  CONSTRAINT PK_Blocs PRIMARY KEY (name),
+  CONSTRAINT FK_Blocs_Users FOREIGN KEY (creator) REFERENCES Users(login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --Default params
@@ -58,3 +58,5 @@ Nous sommes impatients de vous rencontrer et de partager des moments mémorables
 <br/>
 L'équipe des Aubergines.
 ");
+
+COMMIT;
